@@ -7,7 +7,7 @@ public class Main { // TESTINGGGGGGG
 		
 		Personaje villano = new Villano("Juan", "Juan el malvado", -10,10,10,10);
 	
-		
+		no se que onda
 	
 	}
 

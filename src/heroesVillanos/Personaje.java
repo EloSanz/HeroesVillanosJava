@@ -1,6 +1,6 @@
 package heroesVillanos;
 
-public abstract class Personaje {
+public abstract class Personaje implements Luchador{
     private String nombreReal;
     private String nombrePersonaje;
     private int velocidad;
@@ -35,6 +35,10 @@ public abstract class Personaje {
         }
     }
 
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> af46b40eb64bce567ad3eb15633d2aed8fa8ffda
     public void setVelocidad(int velocidad) {
         if (velocidad < 0) {
             throw new IllegalArgumentException("La velocidad no puede ser negativa");

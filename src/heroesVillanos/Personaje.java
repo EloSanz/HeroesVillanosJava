@@ -35,7 +35,6 @@ public abstract class Personaje {
         }
     }
 
-    
     public void setVelocidad(int velocidad) {
         if (velocidad < 0) {
             throw new IllegalArgumentException("La velocidad no puede ser negativa");
@@ -67,6 +66,7 @@ public abstract class Personaje {
 	public String getNombreReal() {
 		return nombreReal;
 	}
+
 	public void setNombreReal(String nombreReal) {
 		this.nombreReal = nombreReal;
 	}

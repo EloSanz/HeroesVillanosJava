@@ -16,7 +16,7 @@ public class Main { // TESTINGGGGGGG
         
         //System.out.println("Resultado de la comparación: " + resultado);
 
-        System.out.println("Esto deberia funcionar.");
+        System.out.println("Elo modificó esto.");
 	
 	}
 }

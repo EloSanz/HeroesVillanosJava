@@ -23,4 +23,7 @@ public abstract class Competidor {
             	throw new CaracteristicaInexistenteException("Característica inexistente: " + caracteristica);
         }
     }
+
+	public abstract boolean esHeroe();
+	public abstract boolean esVillano();
 }

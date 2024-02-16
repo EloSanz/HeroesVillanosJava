@@ -6,6 +6,8 @@ import java.util.List;
 public class Liga extends Competidor {
     private String nombre;
     private List<Competidor> miembros; //tanto Personajes como Ligas
+    private boolean esHomogenea = true;
+    private boolean esLigaDeHeroes = true;
     
     /* Supongamos que tenemos la liga: "Amigos de Spiderman"
     * 
@@ -17,7 +19,20 @@ public class Liga extends Competidor {
         this.miembros = new ArrayList<>();
     }
     
-    public void agregarMiembro(Personaje miembroNuevo) {
+    public void agregarMiembro(Competidor miembroNuevo) { // YA NO ES BOOLEAN YA QUE NO HAY RESTRICCIONES PARA LAS LIGAS MIXTAS
+        if(miembros.isEmpty()) {
+            if(miembroNuevo.esVillano()) {
+                this.esLigaDeHeroes = false;
+            }
+        } else {
+            if(esLigaDeHeroes && miembroNuevo.esVillano()) {
+                this.esLigaDeHeroes = false;
+                this.esHomogenea = false;
+            } else if(!esLigaDeHeroes && esHomogenea && miembroNuevo.esHeroe()){
+                this.esHomogenea = false;
+            }
+        }
+
         miembros.add(miembroNuevo);
     }
 

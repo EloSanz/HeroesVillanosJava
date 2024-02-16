@@ -12,9 +12,9 @@ public class Main {
        
         villanosSpiderman.agregarMiembro(venom);
 
-        boolean resultado = villanosSpiderman.venceA(spiderman, Caracteristica.FUERZA);
+        //boolean resultado = villanosSpiderman.venceA(spiderman, Caracteristica.FUERZA);
         
-        System.out.println("Resultado de la comparación: " + resultado);
+        //System.out.println("Resultado de la comparación: " + resultado);
 	
 	}
 

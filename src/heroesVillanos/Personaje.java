@@ -34,15 +34,7 @@ public abstract class Personaje implements Luchador{
             	throw new IllegalArgumentException("Característica inexistente: " + caracteristica);
         }
     }
-<<<<<<< HEAD
 
-<<<<<<< HEAD
- 
-=======
->>>>>>> 73852825dd5e73a1a253cc0dcd913df42312b08c
-=======
-    
->>>>>>> 3a57ea349d00abb5eab52407568190ae9b129d8d
     public void setVelocidad(int velocidad) {
         if (velocidad < 0) {
             throw new IllegalArgumentException("La velocidad no puede ser negativa");

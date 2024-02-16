@@ -7,5 +7,20 @@ public class Heroe extends Personaje{
 		
 	}
 
+	public boolean venceA(Luchador luchador, Caracteristica caracteristica) {
+		//implementar
+		return false;
+	}
+
+	@Override
+	public boolean esHeroe() {
+
+		return true;
+	}
+	@Override
+	public boolean esVillano() {
+		return false;
+	}
+
 	
 }

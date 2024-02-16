@@ -2,8 +2,6 @@ package heroesVillanos;
 
 public enum Caracteristica {
 
-	// VELOCIDAD, FUERZA, RESISTENCIA, DESTREZA
+	VELOCIDAD, FUERZA, RESISTENCIA, DESTREZA
 
-	holaaaaa
-
-	}
+}

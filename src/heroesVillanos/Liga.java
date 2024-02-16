@@ -3,14 +3,14 @@ package heroesVillanos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Liga implements Luchador {
+public class Liga extends Competidor {
     private String nombre;
-    private List<Luchador> miembros; //tanto Personajes como Ligas
+    private List<Competidor> miembros; //tanto Personajes como Ligas
     
     /* Supongamos que tenemos la liga: "Amigos de Spiderman"
-     * 
-     * 
-     */
+    * 
+    * 
+    */
     
     public Liga(String nombre) {
         this.setNombre(nombre);
@@ -21,35 +21,48 @@ public class Liga implements Luchador {
         miembros.add(miembroNuevo);
     }
 
-    @Override
-    public boolean venceA(Luchador luchador, Caracteristica caracteristica) {
-    	//implementar
-        //System.out.println(luchador. + " contra " + competidor.getNombrePersonaje());
-    	
-        return true;
-    }
-
-    
-
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
+    public double getVelocidad() {  // CADA VEZ QUE SE LLAMA A ESTE METODO, SE CALCULA NUEVAMENTE EL PROMEDIO
+        double velocidades = 0;
+        for (Competidor competidor : miembros) {
+            velocidades += competidor.getVelocidad();
+        }
+        
+        return (velocidades / miembros.size());
+    }
 
+	public double getFuerza() {  // CADA VEZ QUE SE LLAMA A ESTE METODO, SE CALCULA NUEVAMENTE EL PROMEDIO
+        double fuerzas = 0;
+        for (Competidor competidor : miembros) {
+            fuerzas += competidor.getFuerza();
+        }
+        
+        return (fuerzas / miembros.size());
+    }
 
-	@Override
-	public boolean esHeroe() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public double getResistencia() {  // CADA VEZ QUE SE LLAMA A ESTE METODO, SE CALCULA NUEVAMENTE EL PROMEDIO
+        double resistencias = 0;
+        for (Competidor competidor : miembros) {
+            resistencias += competidor.getResistencia();
+        }
+        
+        return (resistencias / miembros.size());
+    }
 
-	@Override
-	public boolean esVillano() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public double getDestreza() {  // CADA VEZ QUE SE LLAMA A ESTE METODO, SE CALCULA NUEVAMENTE EL PROMEDIO
+        double destrezas = 0;
+        for (Competidor competidor : miembros) {
+            destrezas += competidor.getDestreza();
+        }
+        
+        return (destrezas / miembros.size());
+    }
+
 }

@@ -80,4 +80,14 @@ public class Liga extends Competidor {
         return (destrezas / miembros.size());
     }
 
+    @Override
+    public boolean esHeroe() {
+        return this.esLigaDeHeroes;
+    }
+
+    @Override
+    public boolean esVillano() {
+        return (!esLigaDeHeroes && esHomogenea) ? true : false;
+    }
+
 }

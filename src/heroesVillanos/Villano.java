@@ -10,6 +10,21 @@ public class Villano extends Personaje{
 	public Villano() {
 		
 	}
+
+	@Override
+	public boolean venceA(Luchador luchador, Caracteristica caracteristica) {
+		throw new UnsupportedOperationException("Unimplemented method 'venceA'");
+	}
+
+	@Override
+	public boolean esHeroe() {
+		return true;
+	}
+
+	@Override
+	public boolean esVillano() {
+		return true;
+	}
 	
 
 }

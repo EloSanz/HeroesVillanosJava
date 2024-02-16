@@ -18,7 +18,7 @@ public abstract class Personaje implements Luchador{
     }
     public Personaje()
     {
-    	
+    	System.out.println("Esto es un test.");
     }
     public boolean venceA(Personaje otro, Caracteristica caracteristica) {
         switch (caracteristica) {
@@ -34,7 +34,7 @@ public abstract class Personaje implements Luchador{
             	throw new IllegalArgumentException("Característica inexistente: " + caracteristica);
         }
     }
-    
+
     public void setVelocidad(int velocidad) {
         if (velocidad < 0) {
             throw new IllegalArgumentException("La velocidad no puede ser negativa");

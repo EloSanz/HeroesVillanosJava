@@ -48,7 +48,9 @@ public class Liga extends Competidor {
         for (Competidor competidor : miembros) {
             velocidades += competidor.getVelocidad();
         }
-        
+        if(this.esHomogenea)
+            return (velocidades / miembros.size()) * 1.10;//bonus
+
         return (velocidades / miembros.size());
     }
 
@@ -57,7 +59,8 @@ public class Liga extends Competidor {
         for (Competidor competidor : miembros) {
             fuerzas += competidor.getFuerza();
         }
-        
+        if(this.esHomogenea)
+            return (fuerzas / miembros.size()) * 1.10;//bonus
         return (fuerzas / miembros.size());
     }
 
@@ -66,7 +69,8 @@ public class Liga extends Competidor {
         for (Competidor competidor : miembros) {
             resistencias += competidor.getResistencia();
         }
-        
+        if(this.esHomogenea)
+            return (resistencias / miembros.size()) * 1.10;//bonus
         return (resistencias / miembros.size());
     }
 
@@ -75,7 +79,8 @@ public class Liga extends Competidor {
         for (Competidor competidor : miembros) {
             destrezas += competidor.getDestreza();
         }
-        
+        if(this.esHomogenea)
+            return (destrezas / miembros.size()) * 1.10;//bonus
         return (destrezas / miembros.size());
     }
 

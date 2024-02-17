@@ -24,8 +24,7 @@ public class Archivo {
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] partes = linea.split(", "); //lee linea por 
-
+                String[] partes = linea.split(", "); //lee linea por linea
 
                 if (partes.length == 7) { //si la linea es correcta
                     String tipo = partes[0];
@@ -48,7 +47,7 @@ public class Archivo {
                             e.printStackTrace();
                         }
                     }
-                }
+                }//else es Incorrecta, podríamos hacer un archivo de erorres.
             }
         } catch (IOException e) {
             e.printStackTrace();

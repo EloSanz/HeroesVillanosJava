@@ -8,22 +8,21 @@ public class Main {
     public static void main(String[] args) {
             
     try {
-        Personaje villano = new Villano("Juan", "Juan el malvado", -10, 10,10, 10);
-        Personaje spiderman = new Heroe("Peter", "Spiderman", 350, 300, 300, 550);
+        Personaje villano = new Villano("Juan", "Juan el malvado", 300, 400,400, 450);
+        Personaje spiderman = new Heroe("Peter", "Spiderman", 300, 300, 300, 550);
         Personaje venom = new Villano("Fulanito", "Venom", 300, 400, 400, 300);
+        
+        Liga villanosSpiderman = new Liga("Villanos de Spiderman");
+        villanosSpiderman.agregarMiembro(villano);
+        villanosSpiderman.agregarMiembro(venom);
+        //villanosSpiderman.agregarMiembro(spiderman);
+        System.out.println(villanosSpiderman.getVelocidad());
+    
     } catch (CaracteristicaNegativaException e) {
         e.printStackTrace();
     }
 
-    //Liga villanosSpiderman = new Liga("Villanos de Spiderman");
-
-    //villanosSpiderman.agregarMiembro(venom);
-
-    //boolean resultado = villanosSpiderman.venceA(spiderman, Caracteristica.FUERZA);
-
-    //System.out.println("Resultado de la comparación: " + resultado);
-
-    System.out.println("mbbbbbbbbbbb");
+    
 
     }
 }

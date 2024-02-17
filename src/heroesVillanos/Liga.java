@@ -21,7 +21,7 @@ public class Liga extends Competidor {
     
     public void agregarMiembro(Competidor miembroNuevo) { // YA NO ES BOOLEAN YA QUE NO HAY RESTRICCIONES PARA LAS LIGAS MIXTAS
         if(miembros.isEmpty()) {
-            if(miembroNuevo.esVillano()) {
+            if( this.esLigaDeHeroes != false && miembroNuevo.esVillano()) {
                 this.esLigaDeHeroes = false;
             }
         } else {
@@ -32,7 +32,6 @@ public class Liga extends Competidor {
                 this.esHomogenea = false;
             }
         }
-
         miembros.add(miembroNuevo);
     }
 

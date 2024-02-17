@@ -2,10 +2,12 @@ package heroesVillanos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Liga extends Competidor {
     private String nombre;
     private List<Competidor> miembros; //tanto Personajes como Ligas
+    private Set<String> miembrosString; // Utilizamos un Set para evitar duplicados
     private boolean esHomogenea = true;
     private boolean esLigaDeHeroes = true;
     
@@ -19,6 +21,11 @@ public class Liga extends Competidor {
         this.miembros = new ArrayList<>();
     }
     
+    public Liga(String nombre, Set<String> miembrosString) {
+        this.setNombre(nombre);
+        this.miembros = new ArrayList<>();
+        this.miembrosString = miembrosString;
+    }
     public void agregarMiembro(Competidor miembroNuevo) { // YA NO ES BOOLEAN YA QUE NO HAY RESTRICCIONES PARA LAS LIGAS MIXTAS
         if(miembros.isEmpty()) {
             if( this.esLigaDeHeroes != false && miembroNuevo.esVillano()) {
@@ -84,6 +91,11 @@ public class Liga extends Competidor {
         return (destrezas / miembros.size());
     }
 
+    public void agregarMiembrosString(Set <String> miembrosNuevos)
+    {
+        this.miembrosString.addAll(miembrosNuevos);
+    }
+
     @Override
     public boolean esHeroe() {
         return this.esLigaDeHeroes;
@@ -93,5 +105,10 @@ public class Liga extends Competidor {
     public boolean esVillano() {
         return (!esLigaDeHeroes && esHomogenea) ? true : false;
     }
+
+    public Set<String> getMiembrosString() {
+        return this.miembrosString;
+    }
+
 
 }

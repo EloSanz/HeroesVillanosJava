@@ -5,9 +5,7 @@ import java.util.List;
 import archivos.Archivo;
 import heroesVillanos.*;
 
-
-    
-    public class Main {
+public class Main {
     public static List<Personaje> personajes = new ArrayList<>();
     public static List<Competidor> ligas = new ArrayList<>();
 
@@ -33,6 +31,7 @@ import heroesVillanos.*;
             }
         }
     }
+
     public static void mostrarListaLigas(List<Competidor> competidores) {
         for (Competidor competidor : competidores) {
             if (competidor instanceof Liga) {
@@ -45,8 +44,8 @@ import heroesVillanos.*;
             }
         }
     }
-    public static void mostrarLiga(Liga liga)
-    {
+
+    public static void mostrarLiga(Liga liga) {
         System.out.println("Liga: " + liga.getNombre());
     }
 
@@ -55,35 +54,38 @@ import heroesVillanos.*;
         personajes = archivoPersonajes.cargarPersonajes();
 
     }
-    public static void testArchivoLigas(){
+
+    public static void testArchivoLigas() {
         Archivo archivoLigas = new Archivo("ligas.in");
         ligas = archivoLigas.cargarLigas();
-        //mostrarListaLigas(ligas);
-        
-        /*    
-        System.out.println("\n");
-        Liga ligaPrimera = ligas.get(0);
-        ligaPrimera.agregarMiembrosString(ligaPrimera.getMiembrosString());//agrega la lista de miembros
+        // mostrarListaLigas(ligas);
 
-        ligaPrimera.agregarMiembro(ligas.get(1));//agrega otra subliga
-        System.out.println("Liga primera: " + ligaPrimera.getNombre() + ligaPrimera.getMiembrosString());
-        
-        
-        System.out.println("se agrega la liga: " + ligas.get(1).getNombre());
-        System.out.println("se agrega " + ligas.get(1).getMiembrosString());
-
-        ligaPrimera.agregarMiembrosString(ligas.get(1).getMiembrosString());//agregamos los demas miembros
-
-        System.out.println("\nLiga actualizada: " + ligaPrimera.getNombre());
-        System.out.println("Miembros: " + ligaPrimera.getMiembrosString()) ; 
-        */
+        /*
+         * System.out.println("\n");
+         * Liga ligaPrimera = ligas.get(0);
+         * ligaPrimera.agregarMiembrosString(ligaPrimera.getMiembrosString());//agrega
+         * la lista de miembros
+         * 
+         * ligaPrimera.agregarMiembro(ligas.get(1));//agrega otra subliga
+         * System.out.println("Liga primera: " + ligaPrimera.getNombre() +
+         * ligaPrimera.getMiembrosString());
+         * 
+         * 
+         * System.out.println("se agrega la liga: " + ligas.get(1).getNombre());
+         * System.out.println("se agrega " + ligas.get(1).getMiembrosString());
+         * 
+         * ligaPrimera.agregarMiembrosString(ligas.get(1).getMiembrosString());//
+         * agregamos los demas miembros
+         * 
+         * System.out.println("\nLiga actualizada: " + ligaPrimera.getNombre());
+         * System.out.println("Miembros: " + ligaPrimera.getMiembrosString()) ;
+         */
     }
 
-    public static void mostrarListaPersonajes(List<Personaje> personajes)
-    {
+    public static void mostrarListaPersonajes(List<Personaje> personajes) {
         System.out.println("Lista personajes:\n");
-        for(Personaje personaje : personajes)
-             System.out.println(personaje.getNombrePersonaje());
+        for (Personaje personaje : personajes)
+            System.out.println(personaje.getNombrePersonaje());
 
     }
 }

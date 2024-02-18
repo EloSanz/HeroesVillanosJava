@@ -17,11 +17,11 @@ import heroesVillanos.Villano;
 
 public class Archivo {
     private String nombreArchivo;
-    public Archivo(String nombreArchivo)
-    {
+
+    public Archivo(String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
     }
-   
+
     public List<Personaje> cargarPersonajes() {
 
         List<Personaje> personajes = new ArrayList<>();
@@ -29,9 +29,9 @@ public class Archivo {
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] partes = linea.split(", "); //lee linea por linea
+                String[] partes = linea.split(", "); // lee linea por linea
 
-                if (partes.length == 7) { //si la linea es correcta
+                if (partes.length == 7) { // si la linea es correcta
                     String tipo = partes[0];
                     String nombreReal = partes[1];
                     String nombrePersonaje = partes[2];
@@ -41,18 +41,20 @@ public class Archivo {
                     int destreza = Integer.parseInt(partes[6]);
                     if ("Héroe".equals(tipo)) {
                         try {
-                            personajes.add(new Heroe(nombreReal, nombrePersonaje, velocidad, fuerza, resistencia, destreza));
+                            personajes.add(
+                                    new Heroe(nombreReal, nombrePersonaje, velocidad, fuerza, resistencia, destreza));
                         } catch (CaracteristicaNegativaException e) {
                             e.printStackTrace();
                         }
                     } else if ("Villano".equals(tipo)) {
                         try {
-                            personajes.add(new Villano(nombreReal, nombrePersonaje, velocidad, fuerza, resistencia, destreza));
+                            personajes.add(
+                                    new Villano(nombreReal, nombrePersonaje, velocidad, fuerza, resistencia, destreza));
                         } catch (CaracteristicaNegativaException e) {
                             e.printStackTrace();
                         }
                     }
-                }//else es Incorrecta, podríamos hacer un archivo de erorres.
+                } // else es Incorrecta, podríamos hacer un archivo de erorres.
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,29 +62,25 @@ public class Archivo {
         return personajes;
     }
 
-    public List<Competidor> cargarLigas() 
-    {
-        List <Competidor> ligas = new ArrayList<>();
+    public List<Competidor> cargarLigas() {
+        List<Competidor> ligas = new ArrayList<>();
 
-        try(BufferedReader bf = new BufferedReader(new FileReader(nombreArchivo))) {
+        try (BufferedReader bf = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
-            while( (linea = bf.readLine()) != null)
-            {
+            while ((linea = bf.readLine()) != null) {
                 String[] partes = linea.split(", ");
                 String nombreLiga = partes[0];
                 int cantidadDeMiembros = partes.length;
                 Set<String> miembros = new HashSet<>();
-                for(int i = 1; i < cantidadDeMiembros; i++)
-                {
+                for (int i = 1; i < cantidadDeMiembros; i++) {
                     miembros.add(partes[i]);
                 }
-                ligas.add(new Liga(nombreLiga, miembros)); //miembros puede contener el nombre de otra liga.
+                ligas.add(new Liga(nombreLiga, miembros)); // miembros puede contener el nombre de otra liga.
             }
-        }catch(Exception e)
-        {   
+        } catch (Exception e) {
             e.getMessage();
         }
-    return ligas;
+        return ligas;
     }
 
 }

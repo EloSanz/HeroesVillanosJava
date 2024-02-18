@@ -26,4 +26,5 @@ public abstract class Competidor {
 
 	public abstract boolean esHeroe();
 	public abstract boolean esVillano();
+  
 }

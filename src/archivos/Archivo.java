@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.List;
 
 import Excepciones.CaracteristicaNegativaException;
+import heroesVillanos.Competidor;
 import heroesVillanos.Heroe;
 import heroesVillanos.Liga;
 import heroesVillanos.Personaje;
@@ -20,6 +21,7 @@ public class Archivo {
     {
         this.nombreArchivo = nombreArchivo;
     }
+   
     public List<Personaje> cargarPersonajes() {
 
         List<Personaje> personajes = new ArrayList<>();
@@ -58,11 +60,10 @@ public class Archivo {
         return personajes;
     }
 
-    public List<Liga> cargarLigas() 
+    public List<Competidor> cargarLigas() 
     {
-        List <Liga> ligas = new ArrayList<>();
+        List <Competidor> ligas = new ArrayList<>();
 
-     
         try(BufferedReader bf = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
             while( (linea = bf.readLine()) != null)
@@ -75,7 +76,7 @@ public class Archivo {
                 {
                     miembros.add(partes[i]);
                 }
-                ligas.add(new Liga(nombreLiga, miembros));
+                ligas.add(new Liga(nombreLiga, miembros)); //miembros puede contener el nombre de otra liga.
             }
         }catch(Exception e)
         {   

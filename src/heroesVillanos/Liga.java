@@ -6,28 +6,25 @@ import java.util.Set;
 
 public class Liga extends Competidor {
     private String nombre;
-    private List<Competidor> miembros; //tanto Personajes como Ligas
+    private List<Competidor> competidores; //tanto Personajes como Ligas
     private Set<String> miembrosString; // Utilizamos un Set para evitar duplicados
     private boolean esHomogenea = true;
     private boolean esLigaDeHeroes = true;
     
-    /* Supongamos que tenemos la liga: "Amigos de Spiderman"
-    * 
-    * 
-    */
     
     public Liga(String nombre) {
         this.setNombre(nombre);
-        this.miembros = new ArrayList<>();
+        this.competidores = new ArrayList<>();
     }
     
     public Liga(String nombre, Set<String> miembrosString) {
         this.setNombre(nombre);
-        this.miembros = new ArrayList<>();
+        this.competidores = new ArrayList<>();
         this.miembrosString = miembrosString;
     }
+   
     public void agregarMiembro(Competidor miembroNuevo) { // YA NO ES BOOLEAN YA QUE NO HAY RESTRICCIONES PARA LAS LIGAS MIXTAS
-        if(miembros.isEmpty()) {
+        if(competidores.isEmpty()) {
             if( this.esLigaDeHeroes != false && miembroNuevo.esVillano()) {
                 this.esLigaDeHeroes = false;
             }
@@ -39,7 +36,7 @@ public class Liga extends Competidor {
                 this.esHomogenea = false;
             }
         }
-        miembros.add(miembroNuevo);
+        competidores.add(miembroNuevo);
     }
 
 	public String getNombre() {
@@ -52,43 +49,43 @@ public class Liga extends Competidor {
 
     public double getVelocidad() {  // CADA VEZ QUE SE LLAMA A ESTE METODO, SE CALCULA NUEVAMENTE EL PROMEDIO
         double velocidades = 0;
-        for (Competidor competidor : miembros) {
+        for (Competidor competidor : competidores) {
             velocidades += competidor.getVelocidad();
         }
         if(this.esHomogenea)
-            return (velocidades / miembros.size()) * 1.10;//bonus
+            return (velocidades / competidores.size()) * 1.10;//bonus
 
-        return (velocidades / miembros.size());
+        return (velocidades / competidores.size());
     }
 
 	public double getFuerza() {  // CADA VEZ QUE SE LLAMA A ESTE METODO, SE CALCULA NUEVAMENTE EL PROMEDIO
         double fuerzas = 0;
-        for (Competidor competidor : miembros) {
+        for (Competidor competidor : competidores) {
             fuerzas += competidor.getFuerza();
         }
         if(this.esHomogenea)
-            return (fuerzas / miembros.size()) * 1.10;//bonus
-        return (fuerzas / miembros.size());
+            return (fuerzas / competidores.size()) * 1.10;//bonus
+        return (fuerzas / competidores.size());
     }
 
 	public double getResistencia() {  // CADA VEZ QUE SE LLAMA A ESTE METODO, SE CALCULA NUEVAMENTE EL PROMEDIO
         double resistencias = 0;
-        for (Competidor competidor : miembros) {
+        for (Competidor competidor : competidores) {
             resistencias += competidor.getResistencia();
         }
         if(this.esHomogenea)
-            return (resistencias / miembros.size()) * 1.10;//bonus
-        return (resistencias / miembros.size());
+            return (resistencias / competidores.size()) * 1.10;//bonus
+        return (resistencias / competidores.size());
     }
 
 	public double getDestreza() {  // CADA VEZ QUE SE LLAMA A ESTE METODO, SE CALCULA NUEVAMENTE EL PROMEDIO
         double destrezas = 0;
-        for (Competidor competidor : miembros) {
+        for (Competidor competidor : competidores) {
             destrezas += competidor.getDestreza();
         }
         if(this.esHomogenea)
-            return (destrezas / miembros.size()) * 1.10;//bonus
-        return (destrezas / miembros.size());
+            return (destrezas / competidores.size()) * 1.10;//bonus
+        return (destrezas / competidores.size());
     }
 
     public void agregarMiembrosString(Set <String> miembrosNuevos)
@@ -110,5 +107,9 @@ public class Liga extends Competidor {
         return this.miembrosString;
     }
 
-
+    public List<Competidor> getCompetidores()
+    {
+        return this.competidores;
+    }
+    
 }

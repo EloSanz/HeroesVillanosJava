@@ -12,6 +12,8 @@ public abstract class Competidor {
 
     public abstract double getDestreza();
 
+    public abstract void mostrar();
+
     public boolean venceA(Competidor competidor, Caracteristica caracteristica)
             throws CaracteristicaInexistenteException {
         switch (caracteristica) {

@@ -7,24 +7,39 @@ import heroesVillanos.*;
 
 public class Main {
     public static List<Personaje> personajes = new ArrayList<>();
-    public static List<Competidor> ligas = new ArrayList<>();
-
+    public static List<Competidor> ligasGlobal = new ArrayList<>();
+    public static List<String> nombresLigas = new ArrayList<>(); //estrategia elegida
     public static void main(String[] args) {
         testArchivoPersonajes();
         testArchivoLigas();
         cargarCompetidoresEnLigas();
-        mostrarListaLigas(ligas);
+        
+        if(ligasGlobal.get(3) instanceof Liga)
+            {
+                Liga ligaEncontrada = (Liga) ligasGlobal.get(3);
+                System.out.println("Mostrando " + ligaEncontrada.getNombre());
+                mostrarCompetidor(ligaEncontrada);
+            }
     }
-
     public static void cargarCompetidoresEnLigas() {
-        for (Competidor competidor : ligas) {
+        for (Competidor competidor : ligasGlobal) {
             if (competidor instanceof Liga) {
                 Liga liga = (Liga) competidor;
+                nombresLigas.add(liga.getNombre());
                 for (String nombreMiembro : liga.getMiembrosString()) {
                     for (Personaje personaje : personajes) {
                         if (nombreMiembro.equals(personaje.getNombrePersonaje())) {
                             liga.agregarMiembro(personaje);
-                            break;
+                            break; //porque no hay repetidos.
+                        }
+                    }
+                    for (String nombreLiga : nombresLigas) {
+                        if (nombreMiembro.equals(nombreLiga)) {
+                            Liga subliga = encontrarLigaPorNombre(nombreLiga);
+                            if (subliga != null) {//encontré una subliga
+                                liga.agregarMiembro(subliga);
+                                break;
+                            }
                         }
                     }
                 }
@@ -32,22 +47,39 @@ public class Main {
         }
     }
 
-    public static void mostrarListaLigas(List<Competidor> competidores) {
-        for (Competidor competidor : competidores) {
+    public static Liga encontrarLigaPorNombre(String nombreLiga) {
+        for (Competidor competidor : ligasGlobal) {
             if (competidor instanceof Liga) {
                 Liga liga = (Liga) competidor;
-                mostrarLiga(liga);
-                mostrarListaLigas(liga.getCompetidores());
-            } else if (competidor instanceof Personaje) {
-                Personaje personaje = (Personaje) competidor;
-                System.out.println("  Personaje: " + personaje.getNombrePersonaje());
+                if (nombreLiga.equals(liga.getNombre())) {
+                    return liga;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void mostrarCompetidores(List<Competidor> competidores) {
+        for (Competidor competidor : competidores) {
+            if (competidor instanceof Liga) {
+                Liga liga = (Liga) competidor;//necesito para el getCompetidores().
+                liga.mostrar();
+                mostrarCompetidores(liga.getCompetidores());
+            } else { //es personaje
+                competidor.mostrar();
             }
         }
     }
-
-    public static void mostrarLiga(Liga liga) {
-        System.out.println("Liga: " + liga.getNombre());
-    }
+    public static void mostrarCompetidor(Competidor competidor) {
+            if (competidor instanceof Liga) {
+                Liga liga = (Liga) competidor;//necesito para el getCompetidores().
+                liga.mostrar();
+                mostrarCompetidores(liga.getCompetidores());
+            } else { //es personaje
+                competidor.mostrar();
+            }
+        }
+    
 
     public static void testArchivoPersonajes() {
         Archivo archivoPersonajes = new Archivo("personajes.in");
@@ -57,29 +89,7 @@ public class Main {
 
     public static void testArchivoLigas() {
         Archivo archivoLigas = new Archivo("ligas.in");
-        ligas = archivoLigas.cargarLigas();
-        // mostrarListaLigas(ligas);
-
-        /*
-         * System.out.println("\n");
-         * Liga ligaPrimera = ligas.get(0);
-         * ligaPrimera.agregarMiembrosString(ligaPrimera.getMiembrosString());//agrega
-         * la lista de miembros
-         * 
-         * ligaPrimera.agregarMiembro(ligas.get(1));//agrega otra subliga
-         * System.out.println("Liga primera: " + ligaPrimera.getNombre() +
-         * ligaPrimera.getMiembrosString());
-         * 
-         * 
-         * System.out.println("se agrega la liga: " + ligas.get(1).getNombre());
-         * System.out.println("se agrega " + ligas.get(1).getMiembrosString());
-         * 
-         * ligaPrimera.agregarMiembrosString(ligas.get(1).getMiembrosString());//
-         * agregamos los demas miembros
-         * 
-         * System.out.println("\nLiga actualizada: " + ligaPrimera.getNombre());
-         * System.out.println("Miembros: " + ligaPrimera.getMiembrosString()) ;
-         */
+        ligasGlobal = archivoLigas.cargarLigas();
     }
 
     public static void mostrarListaPersonajes(List<Personaje> personajes) {

@@ -21,7 +21,11 @@ public class Liga extends Competidor {
         this.competidores = new ArrayList<>();
         this.miembrosString = miembrosString;
     }
-
+    @Override
+    public void mostrar()
+    {
+        System.out.println("Liga: "+this.nombre);
+    }
     public void agregarMiembro(Competidor miembroNuevo) { // YA NO ES BOOLEAN YA QUE NO HAY RESTRICCIONES PARA LAS LIGAS
                                                           // MIXTAS
         if (competidores.isEmpty()) {

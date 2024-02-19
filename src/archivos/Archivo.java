@@ -66,7 +66,7 @@ public class Archivo {
     public List<Competidor> cargarLigas() {
         List<Competidor> ligas = new ArrayList<>();
 
-        try (BufferedReader bf = new BufferedReader(new FileReader(nombreArchivo))) {
+        try (BufferedReader bf = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] partes = linea.split(", ");
@@ -74,10 +74,10 @@ public class Archivo {
                 int cantidadDeMiembros = partes.length;
                 Set<String> miembros = new HashSet<>();
                 for (int i = 1; i < cantidadDeMiembros; i++) {
-                    miembros.add(partes[i]);
+                    miembros.add(partes[i]);//lista de String (solo el nombre)
                 }
                 ligas.add(new Liga(nombreLiga, miembros)); // miembros puede contener el nombre de otra liga.
-            }
+            }                       //se carga el nombre y la lista String de miembros
         } catch (Exception e) {
             e.getMessage();
         }

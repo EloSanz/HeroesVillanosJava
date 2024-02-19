@@ -82,13 +82,13 @@ public class Main {
     
 
     public static void testArchivoPersonajes() {
-        Archivo archivoPersonajes = new Archivo("personajes.in");
+        Archivo archivoPersonajes = new Archivo("HeroesVillanosJava\\personajes.in");
         personajes = archivoPersonajes.cargarPersonajes();
 
     }
 
     public static void testArchivoLigas() {
-        Archivo archivoLigas = new Archivo("ligas.in");
+        Archivo archivoLigas = new Archivo("HeroesVillanosJava\\ligas.in");
         ligasGlobal = archivoLigas.cargarLigas();
     }
 

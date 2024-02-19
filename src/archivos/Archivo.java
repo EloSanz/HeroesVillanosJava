@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
+import java.nio.charset.StandardCharsets; // para que lea caracteres especiales
 
 import Excepciones.CaracteristicaNegativaException;
 import heroesVillanos.Competidor;
@@ -26,7 +27,7 @@ public class Archivo {
 
         List<Personaje> personajes = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) { // UTF-8 para que lea caracteres especiales
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split(", "); // lee linea por linea

@@ -63,7 +63,7 @@ public class Archivo {
         return personajes;
     }
 
-    public List<Competidor> cargarLigas() {
+    public List<Competidor> cargarLigas(List<String> nombresLigas) {
         List<Competidor> ligas = new ArrayList<>();
 
         try (BufferedReader bf = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) {
@@ -71,6 +71,7 @@ public class Archivo {
             while ((linea = bf.readLine()) != null) {
                 String[] partes = linea.split(", ");
                 String nombreLiga = partes[0];
+                nombresLigas.add(nombreLiga);
                 int cantidadDeMiembros = partes.length;
                 Set<String> miembros = new HashSet<>();
                 for (int i = 1; i < cantidadDeMiembros; i++) {

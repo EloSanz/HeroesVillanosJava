@@ -6,42 +6,52 @@ import archivos.Archivo;
 import heroesVillanos.*;
 
 public class Main {
-    public static List<Personaje> personajes = new ArrayList<>();
+    public static List<Personaje> personajesGlobal = new ArrayList<>();
     public static List<Competidor> ligasGlobal = new ArrayList<>();
     public static List<String> nombresLigas = new ArrayList<>(); //estrategia elegida
+   
+
     public static void main(String[] args) {
-        testArchivoPersonajes();
-        testArchivoLigas();
+        testArchivoPersonajes();//carga personajes
+        testArchivoLigas();//carga los nombres de las ligas
         cargarCompetidoresEnLigas();
         
-        if(ligasGlobal.get(3) instanceof Liga)
-            {
-                Liga ligaEncontrada = (Liga) ligasGlobal.get(3);
-                System.out.println("Mostrando " + ligaEncontrada.getNombre());
-                mostrarCompetidor(ligaEncontrada);
-            }
+
+        //interfaz.InterfazDeUsuario.menu();
+
+
+        mostrarCompetidores(ligasGlobal);
+        //mostrarCompetidor(ligasGlobal.get(3));
+        //System.out.println(ligasGlobal.get(3));
     }
+   
     public static void cargarCompetidoresEnLigas() {
         for (Competidor competidor : ligasGlobal) {
             if (competidor instanceof Liga) {
                 Liga liga = (Liga) competidor;
-                nombresLigas.add(liga.getNombre());
+                //nombresLigas.add(liga.getNombre());
                 for (String nombreMiembro : liga.getMiembrosString()) {
-                    for (Personaje personaje : personajes) {
+                    int encontroPersonaje = 0;
+                    for (Personaje personaje : personajesGlobal) {
                         if (nombreMiembro.equals(personaje.getNombrePersonaje())) {
                             liga.agregarMiembro(personaje);
+                            encontroPersonaje = 1;
                             break; //porque no hay repetidos.
                         }
-                    }
-                    for (String nombreLiga : nombresLigas) {
-                        if (nombreMiembro.equals(nombreLiga)) {
-                            Liga subliga = encontrarLigaPorNombre(nombreLiga);
-                            if (subliga != null) {//encontré una subliga
-                                liga.agregarMiembro(subliga);
-                                break;
+                    }//terminó, lo encuentra o no es un personaje.
+                    if(encontroPersonaje == 0)
+                    {
+                        for (String nombreLiga : nombresLigas) {
+                            if (nombreMiembro.equals(nombreLiga)) {
+                                Liga subliga = encontrarLigaPorNombre(nombreLiga);
+                                if (subliga != null) {//encontré una subliga (nunca debería fallar acá)
+                                    liga.agregarMiembro(subliga);
+                                    break;
+                                }
                             }
                         }
                     }
+                   
                 }
             }
         }
@@ -49,13 +59,11 @@ public class Main {
 
     public static Liga encontrarLigaPorNombre(String nombreLiga) {
         for (Competidor competidor : ligasGlobal) {
-            if (competidor instanceof Liga) {
+            if( nombreLiga.equals( competidor.getNombre() ) ){
                 Liga liga = (Liga) competidor;
-                if (nombreLiga.equals(liga.getNombre())) {
-                    return liga;
+                return liga;
                 }
             }
-        }
         return null;
     }
 
@@ -79,17 +87,23 @@ public class Main {
                 competidor.mostrar();
             }
         }
+
+    public static void mostrarCompetidor2() {
+            for (Competidor competidor : ligasGlobal) {
+                competidor.mostrar();
+            }   
+        }
     
 
     public static void testArchivoPersonajes() {
-        Archivo archivoPersonajes = new Archivo("HeroesVillanosJava\\personajes.in");
-        personajes = archivoPersonajes.cargarPersonajes();
+        Archivo archivoPersonajes = new Archivo("personajes.in");
+        personajesGlobal = archivoPersonajes.cargarPersonajes();
 
     }
 
     public static void testArchivoLigas() {
-        Archivo archivoLigas = new Archivo("HeroesVillanosJava\\ligas.in");
-        ligasGlobal = archivoLigas.cargarLigas();
+        Archivo archivoLigas = new Archivo("ligas.in");
+        ligasGlobal = archivoLigas.cargarLigas(nombresLigas);
     }
 
     public static void mostrarListaPersonajes(List<Personaje> personajes) {

@@ -14,6 +14,8 @@ public abstract class Competidor {
 
     public abstract void mostrar();
 
+    public abstract String getNombre();
+
     public boolean venceA(Competidor competidor, Caracteristica caracteristica, int contador) throws CaracteristicaInexistenteException {
         if(contador > 3) {
             return false;

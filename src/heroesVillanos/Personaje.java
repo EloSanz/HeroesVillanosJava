@@ -60,6 +60,8 @@ public abstract class Personaje extends Competidor {
         this.nombreReal = nombreReal;
     }
 
+
+
     public String getNombrePersonaje() {
         return nombrePersonaje;
     }

@@ -12,7 +12,13 @@ public class Villano extends Personaje {
 	@Override
 	public String toString()
 	{
-		return "\tvillano: " + this.getNombrePersonaje() + " " + this.getNombreReal();
+		return String.format("\tVillano: %s\t%s\tv = %.1f\tf = %.1f\td = %.1f\tr = %.1f",
+            this.getNombrePersonaje(),
+            this.getNombreReal(),
+            this.getVelocidad(),
+            this.getFuerza(),
+            this.getDestreza(),
+            this.getResistencia());
 	}
 
     public void mostrar()

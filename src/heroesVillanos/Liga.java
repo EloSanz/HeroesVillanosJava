@@ -1,15 +1,27 @@
 package heroesVillanos;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Liga extends Competidor {
     private String nombre;
+    
     private List<Competidor> competidores; // tanto Personajes como Ligas
+    
     private Set<String> miembrosString; // Utilizamos un Set para evitar duplicados
+    
     private boolean esHomogenea = true;
+    
     private boolean esLigaDeHeroes = true;
+
+    private Set<Personaje> personajes = new HashSet<Personaje>();
+
+    public Set<Personaje> getPersonajes()
+    {
+        return this.personajes;
+    }
 
     public Liga(String nombre) {
         this.setNombre(nombre);

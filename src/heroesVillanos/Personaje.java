@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import Excepciones.CaracteristicaNegativaException;
 
-public abstract class Personaje extends Competidor {
+public abstract class Personaje extends Competidor implements Comparable<Personaje>{
     private String nombreReal;
     private String nombrePersonaje;
 
@@ -60,8 +60,6 @@ public abstract class Personaje extends Competidor {
         this.nombreReal = nombreReal;
     }
 
-
-
     public String getNombrePersonaje() {
         return nombrePersonaje;
     }
@@ -87,9 +85,13 @@ public abstract class Personaje extends Competidor {
     }
 
     // COMPARADORES
+    @Override
+    public int compareTo(Personaje obj)
+    {
+        return (int) (this.getFuerza() - obj.getFuerza());
+    }
     public static final Comparator<Personaje> VELOCIDAD = Comparator.comparingDouble(Personaje::getVelocidad);
     public static final Comparator<Personaje> FUERZA = Comparator.comparingDouble(Personaje::getFuerza);
     public static final Comparator<Personaje> RESISTENCIA = Comparator.comparingDouble(Personaje::getResistencia);
     public static final Comparator<Personaje> DESTREZA = Comparator.comparingDouble(Personaje::getDestreza);
-
 }

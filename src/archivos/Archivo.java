@@ -23,9 +23,9 @@ public class Archivo {
         this.nombreArchivo = nombreArchivo;
     }
 
-    public List<Personaje> cargarPersonajes() {
+    public Set<Personaje> cargarPersonajes() {
 
-        List<Personaje> personajes = new ArrayList<>();
+        Set<Personaje> personajes = new HashSet<Personaje>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) { // UTF-8 para que lea caracteres especiales
             String linea;

@@ -3,21 +3,18 @@ package heroesVillanos;
 import Excepciones.CaracteristicaNegativaException;
 
 public class Heroe extends Personaje {
-	public String getNombre(){
-		return this.getNombrePersonaje();
-	}
 
 	@Override
 	public String toString()
 	{
-		return String.format("\tHéroe: %-20s\t%-20s\tv = %.1f\tf = %.1f\td = %.1f\tr = %.1f",
-            this.getNombrePersonaje(),
+		return String.format("%15s: \t%-20s %-20s  \t%.1f\t%.1f\t%.1f\t%.1f",
+			"Héroe",
+            this.getNombre(),
             this.getNombreReal(),
             this.getVelocidad(),
             this.getFuerza(),
             this.getDestreza(),
             this.getResistencia());
-
 	}
     public void mostrar(){
         System.out.println(this);

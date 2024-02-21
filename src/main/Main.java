@@ -22,7 +22,6 @@ public class Main {
         } catch (LigaInexistente e) {
             e.printStackTrace();
         }
-        
 
         //interfaz.InterfazDeUsuario.menu();
 
@@ -42,7 +41,7 @@ public class Main {
                         for (String nombreMiembro : liga.getMiembrosString()) {
                         int encontroMiembro = 0;
                         for (Personaje personaje : personajesGlobal) {
-                            if (nombreMiembro.equals(personaje.getNombrePersonaje())) {
+                            if (nombreMiembro.equals(personaje.getNombre())) {
                                 liga.getPersonajes().add(personaje);
                                 liga.agregarMiembro(personaje); //redundande pero util
                                 encontroMiembro = 1;
@@ -89,7 +88,7 @@ public class Main {
                 
                 mostrarCompetidores(liga.getCompetidores());
             } else { //es personaje
-                competidor.mostrar();
+                System.out.println(competidor);
             }
         }
     }
@@ -99,13 +98,13 @@ public class Main {
                 liga.mostrar();
                 mostrarCompetidores(liga.getCompetidores());
             } else { //es personaje
-                competidor.mostrar();
+                System.out.println(competidor);;
             }
         }
 
     public static void mostrarCompetidor2() {
             for (Competidor competidor : ligasGlobal) {
-                competidor.mostrar();
+                System.out.println(competidor);
             }   
         }
     
@@ -122,7 +121,7 @@ public class Main {
 
     public static void mostrarListaPersonajes(Set<Personaje> personajes) {
         System.out.println("Lista personajes:\n");
-        System.out.println("Nombre Personaje Nombre Real  \t Velocidad Fuerza Destreza Resistencia");
+        System.out.println("\tHeroe/Villano Nombre Personaje       Nombre Real           Velocidad  Fuerza  Destreza  Resistencia");
 
         for (Personaje personaje : personajes)
             System.out.println(personaje);

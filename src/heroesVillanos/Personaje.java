@@ -6,17 +6,16 @@ import Excepciones.CaracteristicaNegativaException;
 
 public abstract class Personaje extends Competidor implements Comparable<Personaje>{
     private String nombreReal;
-    private String nombrePersonaje;
 
     private int velocidad;
     private int fuerza;
     private int resistencia;
     private int destreza;
 
-    public Personaje(String nombreReal, String nombrePersonaje, int velocidad, int fuerza, int resistencia,
-            int destreza) throws CaracteristicaNegativaException {
+    public Personaje(String nombreReal, String nombre, int velocidad, int fuerza, int resistencia,
+        int destreza) throws CaracteristicaNegativaException {
         this.nombreReal = nombreReal;
-        this.nombrePersonaje = nombrePersonaje;
+        this.nombre = nombre;
 
         setVelocidad(velocidad);
         setFuerza(fuerza);
@@ -60,12 +59,12 @@ public abstract class Personaje extends Competidor implements Comparable<Persona
         this.nombreReal = nombreReal;
     }
 
-    public String getNombrePersonaje() {
-        return nombrePersonaje;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombrePersonaje(String nombrePersonaje) {
-        this.nombrePersonaje = nombrePersonaje;
+    public void setNombre(String nombrePersonaje) {
+        this.nombre = nombrePersonaje;
     }
 
     public double getVelocidad() {

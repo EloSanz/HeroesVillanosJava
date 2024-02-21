@@ -4,27 +4,18 @@ import Excepciones.CaracteristicaNegativaException;
 
 public class Villano extends Personaje {
 
-	public String getNombre()
-	{
-		return this.getNombrePersonaje();
-	}
-
 	@Override
 	public String toString()
 	{
-		return String.format("\tVillano: %s\t%s\tv = %.1f\tf = %.1f\td = %.1f\tr = %.1f",
-            this.getNombrePersonaje(),
+		return String.format("%15s: \t%-20s %-20s  \t%.1f\t%.1f\t%.1f\t%.1f",
+            "Villano",
+			this.getNombre(),
             this.getNombreReal(),
             this.getVelocidad(),
             this.getFuerza(),
             this.getDestreza(),
             this.getResistencia());
 	}
-
-    public void mostrar()
-    {
-        System.out.println(this);
-    }
 
 	public Villano(String nombreReal, String nombrePersonaje, int velocidad, int fuerza, int resistencia, int destreza)
 			throws CaracteristicaNegativaException {

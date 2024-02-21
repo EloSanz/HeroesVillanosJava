@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Liga extends Competidor {
-    private String nombre;
-    
     private List<Competidor> competidores; // tanto Personajes como Ligas
     
     private Set<String> miembrosString; // Utilizamos un Set para evitar duplicados
@@ -64,10 +62,6 @@ public class Liga extends Competidor {
         competidores.add(miembroNuevo);
     }
 
-
-    public String getNombre() {
-        return this.nombre;
-    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

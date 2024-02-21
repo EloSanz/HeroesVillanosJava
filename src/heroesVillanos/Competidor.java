@@ -3,6 +3,10 @@ package heroesVillanos;
 import Excepciones.CaracteristicaInexistenteException;
 
 public abstract class Competidor {
+    protected String nombre;
+
+    @Override
+    public abstract String toString();
 
     public abstract double getVelocidad();
 
@@ -12,9 +16,10 @@ public abstract class Competidor {
 
     public abstract double getDestreza();
 
-    public abstract void mostrar();
-
-    public abstract String getNombre();
+    public String getNombre()
+    {
+        return nombre;
+    }
 
     public boolean venceA(Competidor competidor, Caracteristica caracteristica, int contador) throws CaracteristicaInexistenteException {
         if(contador > 3) {

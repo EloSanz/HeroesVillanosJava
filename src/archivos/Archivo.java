@@ -61,7 +61,7 @@ public class Archivo {
             while ((linea = bf.readLine()) != null) {
                 String[] partes = linea.split(", ");
                 Liga liga = new Liga(partes [0]);
-                for(int i = 1; i < partes.length; i++)
+                for(int i = 1; i < partes.length; i++)//cargo miembros.
                 {
                     String miembroBuscado = partes[i];
                     for (Competidor competidor : competidores) {

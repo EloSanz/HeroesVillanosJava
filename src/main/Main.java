@@ -12,9 +12,9 @@ public class Main {
 
     public static void main(String[] args) {
         cargarPersonajesEnMemoria("personajes.in");// carga personajes
-        cargarNombreLigas_y_ListaMiembros("ligas.in");
+        cargarLigas_y_Miembros("ligas.in");
 
-        String ligaBuscada = "Los Veloces";
+        String ligaBuscada = "DC";
         for (Competidor competidor : competidores) {
             if(ligaBuscada.equals(competidor.getNombre()))
                 {
@@ -31,7 +31,7 @@ public class Main {
         Archivo archivoPersonajes = new Archivo(Path);
         archivoPersonajes.cargarPersonajes(competidores);
     }
-    public static void cargarNombreLigas_y_ListaMiembros(String Path) {
+    public static void cargarLigas_y_Miembros(String Path) {
         Archivo archivoLigas = new Archivo(Path);
         archivoLigas.cargarLigas(competidores);
     }

@@ -3,17 +3,13 @@ package archivos;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.List;
 import java.nio.charset.StandardCharsets; // para que lea caracteres especiales
 
 import Excepciones.CaracteristicaNegativaException;
 import heroesVillanos.Competidor;
 import heroesVillanos.Heroe;
 import heroesVillanos.Liga;
-import heroesVillanos.Personaje;
 import heroesVillanos.Villano;
 
 public class Archivo {
@@ -23,10 +19,7 @@ public class Archivo {
         this.nombreArchivo = nombreArchivo;
     }
 
-    public Set<Personaje> cargarPersonajes() {
-
-        Set<Personaje> personajes = new HashSet<Personaje>();
-
+    public void cargarPersonajes(Set<Competidor> personajes) {
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) { // UTF-8 para que lea caracteres especiales
             String linea;
             while ((linea = br.readLine()) != null) {
@@ -60,29 +53,30 @@ public class Archivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return personajes;
     }
 
-    public List<Competidor> cargarLigas(List<String> nombresLigas) {
-        List<Competidor> ligas = new ArrayList<>();
-
+    public void cargarLigas(Set<Competidor> competidores) {
         try (BufferedReader bf = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] partes = linea.split(", ");
-                String nombreLiga = partes[0];
-                nombresLigas.add(nombreLiga);
-                int cantidadDeMiembros = partes.length;
-                Set<String> miembros = new HashSet<>();
-                for (int i = 1; i < cantidadDeMiembros; i++) {
-                    miembros.add(partes[i]);//lista de String (solo el nombre)
+                Liga liga = new Liga(partes [0]);
+                for(int i = 1; i < partes.length; i++)
+                {
+                    String miembroBuscado = partes[i];
+                    for (Competidor competidor : competidores) {
+                        if(miembroBuscado.equals(competidor.getNombre()))
+                            {
+                                liga.agregarMiembro(competidor);
+                                break; //no hay competidores con el mismo nombre.
+                            }
+                    }
                 }
-                ligas.add(new Liga(nombreLiga, miembros)); // miembros puede contener el nombre de otra liga.
-            }                       //se carga el nombre y la lista String de miembros
+                competidores.add(liga);                
+            }            
         } catch (Exception e) {
             e.getMessage();
         }
-        return ligas;
     }
 
 }

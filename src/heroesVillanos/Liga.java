@@ -1,35 +1,17 @@
 package heroesVillanos;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Liga extends Competidor {
     private List<Competidor> competidores; // tanto Personajes como Ligas
-    
-    private Set<String> miembrosString; // Utilizamos un Set para evitar duplicados
-    
     private boolean esHomogenea = true;
-    
     private boolean esLigaDeHeroes = true;
-
-    private Set<Personaje> personajes = new HashSet<Personaje>();
-
-    public Set<Personaje> getPersonajes()
-    {
-        return this.personajes;
-    }
-
+    //
     public Liga(String nombre) {
+        esLiga = true;
         this.setNombre(nombre);
         this.competidores = new ArrayList<>();
-    }
-
-    public Liga(String nombre, Set<String> miembrosString) {
-        this.setNombre(nombre);
-        this.competidores = new ArrayList<>();
-        this.miembrosString = miembrosString;
     }
 
     @Override
@@ -37,12 +19,6 @@ public class Liga extends Competidor {
 	{
 		return "Liga: " + this.nombre;
 	}
-
-    public void mostrar()
-    {
-        System.out.println(this);
-    }
-
 
 
     public void agregarMiembro(Competidor miembroNuevo) { // YA NO ES BOOLEAN YA QUE NO HAY RESTRICCIONES PARA LAS LIGAS
@@ -61,7 +37,6 @@ public class Liga extends Competidor {
         }
         competidores.add(miembroNuevo);
     }
-
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -108,10 +83,6 @@ public class Liga extends Competidor {
         return (destrezas / competidores.size());
     }
 
-    public void agregarMiembrosString(Set<String> miembrosNuevos) {
-        this.miembrosString.addAll(miembrosNuevos);
-    }
-
     @Override
     public boolean esHeroe() {
         return this.esLigaDeHeroes;
@@ -122,9 +93,6 @@ public class Liga extends Competidor {
         return (!esLigaDeHeroes && esHomogenea) ? true : false;
     }
 
-    public Set<String> getMiembrosString() {
-        return this.miembrosString;
-    }
 
     public List<Competidor> getCompetidores() {
         return this.competidores;

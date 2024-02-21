@@ -16,7 +16,7 @@ public abstract class Personaje extends Competidor implements Comparable<Persona
         int destreza) throws CaracteristicaNegativaException {
         this.nombreReal = nombreReal;
         this.nombre = nombre;
-
+        this.esLiga = false;
         setVelocidad(velocidad);
         setFuerza(fuerza);
         setResistencia(resistencia);

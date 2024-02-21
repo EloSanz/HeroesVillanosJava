@@ -65,4 +65,5 @@ public abstract class Competidor {
 
     public abstract boolean esVillano();
 
+    public boolean esLiga;
 }

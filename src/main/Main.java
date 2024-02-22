@@ -8,7 +8,6 @@ import archivos.Archivo;
 import heroesVillanos.*;
 
 public class Main {
-    public static ArrayList <Personaje> personajes = new ArrayList<>();
     public static Set<Competidor> competidores = new HashSet<Competidor>();
     public static void main(String[] args) {
         cargarPersonajesEnMemoria("personajes.in");// carga personajes

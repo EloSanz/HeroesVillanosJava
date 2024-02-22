@@ -30,4 +30,8 @@ public class Villano extends Personaje {
 	public boolean esVillano() {
 		return true;
 	}
+	@Override
+	public boolean contieneA(String string) {
+		return this.nombre.equals(string);
+	}
 }

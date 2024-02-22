@@ -1,5 +1,5 @@
 package main;
-
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,29 +8,37 @@ import archivos.Archivo;
 import heroesVillanos.*;
 
 public class Main {
+    public static ArrayList <Personaje> personajes = new ArrayList<>();
     public static Set<Competidor> competidores = new HashSet<Competidor>();
-
     public static void main(String[] args) {
         cargarPersonajesEnMemoria("personajes.in");// carga personajes
         cargarLigas_y_Miembros("ligas.in");
-
-        String ligaBuscada = "DC";
+        
+        //mostrarLigas(competidores);
+        //mostrarPersonajes(competidores);
+        test();
+        //mostrarPersonajes(competidores);
+        //mostrarLigas(competidores);
+    }
+    public static void test()
+    {
+        System.out.println("\n\n");
+        String ligaBuscada = "Los Veloces";
         for (Competidor competidor : competidores) {
             if(ligaBuscada.equals(competidor.getNombre()))
                 {
                     System.out.println("Mostrando: " + competidor.getNombre());
+                    System.out.println(competidor.esVillano());
                     mostrarCompetidor(competidor);
+                    System.err.println(competidor.contieneA("DC"));
                     break;
                 }
         }
-        //mostrarPersonajes(competidores);
-        //mostrarLigas(competidores);
     }
-
     public static void cargarPersonajesEnMemoria(String Path) {
         Archivo archivoPersonajes = new Archivo(Path);
         archivoPersonajes.cargarPersonajes(competidores);
-    }
+    }//tengo unidades en memoria
     public static void cargarLigas_y_Miembros(String Path) {
         Archivo archivoLigas = new Archivo(Path);
         archivoLigas.cargarLigas(competidores);
@@ -72,7 +80,7 @@ public class Main {
         System.out.println("\nLigas:");
         for (Competidor competidor : competidores) {
             if (competidor.esLiga) {
-                System.out.println(competidor);
+                mostrarCompetidor(competidor);
             }
         }
     }

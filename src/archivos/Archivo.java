@@ -3,13 +3,18 @@ package archivos;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+
 import java.nio.charset.StandardCharsets; // para que lea caracteres especiales
 
 import Excepciones.CaracteristicaNegativaException;
 import heroesVillanos.Competidor;
 import heroesVillanos.Heroe;
 import heroesVillanos.Liga;
+import heroesVillanos.Personaje;
 import heroesVillanos.Villano;
 
 public class Archivo {
@@ -20,7 +25,7 @@ public class Archivo {
     }
 
     public void cargarPersonajes(Set<Competidor> personajes) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) { // UTF-8 para que lea caracteres especiales
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) { // UTF- caracteres                                                                                    // especiales
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split(", "); // lee linea por linea
@@ -35,15 +40,13 @@ public class Archivo {
                     int destreza = Integer.parseInt(partes[6]);
                     if ("Héroe".equals(tipo)) {
                         try {
-                            personajes.add(
-                                    new Heroe(nombreReal, nombrePersonaje, velocidad, fuerza, resistencia, destreza));
+                            personajes.add(new Heroe(nombreReal, nombrePersonaje, velocidad, fuerza, resistencia, destreza));
                         } catch (CaracteristicaNegativaException e) {
                             e.printStackTrace();
                         }
                     } else if ("Villano".equals(tipo)) {
                         try {
-                            personajes.add(
-                                    new Villano(nombreReal, nombrePersonaje, velocidad, fuerza, resistencia, destreza));
+                            personajes.add(new Villano(nombreReal, nombrePersonaje, velocidad, fuerza, resistencia, destreza));
                         } catch (CaracteristicaNegativaException e) {
                             e.printStackTrace();
                         }
@@ -55,25 +58,46 @@ public class Archivo {
         }
     }
 
-    public void cargarLigas(Set<Competidor> competidores) {
+
+ public void cargarLigas(Set<Competidor> competidores) {
         try (BufferedReader bf = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] partes = linea.split(", ");
-                Liga liga = new Liga(partes [0]);
-                for(int i = 1; i < partes.length; i++)//cargo miembros.
+                Liga liga = new Liga(partes[0]);// el primero es el nombre de la liga en estos registros.
+                ArrayList<Personaje> personajesCargados = new ArrayList<>();
+                for (int i = 1; i < partes.length; i++)// cargo miembros.
                 {
                     String miembroBuscado = partes[i];
                     for (Competidor competidor : competidores) {
-                        if(miembroBuscado.equals(competidor.getNombre()))
-                            {
+                        if (miembroBuscado.equals(competidor.getNombre())) { 
+                            // si es un personaje y aun no fue cargado en el ArrayList ->
+                            if (!competidor.esLiga && !personajesCargados.contains((Personaje) competidor)) {
                                 liga.agregarMiembro(competidor);
-                                break; //no hay competidores con el mismo nombre.
+                                personajesCargados.add((Personaje) competidor);
                             }
-                    }
+                            if (competidor.esLiga) {
+                                liga.agregarMiembro(competidor);
+                                Liga subliga = (Liga) competidor;
+                                List<Competidor> miembrosSubliga = subliga.getCompetidores();
+
+                                for (Competidor miembro : miembrosSubliga) {
+                                    if (personajesCargados.contains(miembro)) {
+                                        liga.getCompetidores().remove(miembro);
+                                    }
+                                }
+                                /*
+                                 * Como hago para iterar en los miemtros de competidor y eliminar los que esté presentes en personajesCargados
+                                 */
+
+                                }
+                                break; // no hay competidores con el mismo nombre.
+                            }
+                        }
                 }
-                competidores.add(liga);                
-            }            
+                competidores.add(liga);
+            }
+
         } catch (Exception e) {
             e.getMessage();
         }

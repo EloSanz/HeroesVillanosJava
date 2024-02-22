@@ -66,4 +66,8 @@ public abstract class Competidor {
     public abstract boolean esVillano();
 
     public boolean esLiga;
+
+    public abstract boolean contieneA(String string);
+
+
 }

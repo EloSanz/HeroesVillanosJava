@@ -11,7 +11,7 @@ public class Liga extends Competidor {
     public Liga(String nombre) {
         esLiga = true;
         this.setNombre(nombre);
-        this.competidores = new ArrayList<>();
+        this.competidores = new ArrayList<>();//compoite implementado
     }
 
     @Override
@@ -93,7 +93,23 @@ public class Liga extends Competidor {
         return (!esLigaDeHeroes && esHomogenea) ? true : false;
     }
 
-
+    @Override
+    public boolean contieneA(String nombre)
+    {
+        for (Competidor competidor : competidores) {
+            if(competidor.getNombre().equals(nombre))
+                return true;
+        }
+        return false;
+    }
+    public boolean contieneA(Competidor other)
+    {
+        for (Competidor competidor : competidores) {
+            if(competidor.getNombre().equals(other.getNombre()))
+                return true;
+        }
+        return false;
+    }
     public List<Competidor> getCompetidores() {
         return this.competidores;
     }

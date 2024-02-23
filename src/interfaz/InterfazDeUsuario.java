@@ -3,11 +3,11 @@ package interfaz;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
+import archivos.Archivo;
 import heroesVillanos.Competidor;
 import heroesVillanos.Liga;
 
@@ -15,7 +15,11 @@ public class InterfazDeUsuario {
 
 
     public static void menu() {
-         Set<Competidor> competidores = new HashSet<Competidor>();
+        Map<String,Competidor> competidores = new HashMap<>();
+
+        Archivo archivo = new Archivo("personajes.in");
+        archivo.cargarPersonajes(competidores);
+        archivo.cargarLigas("ligas.in", competidores);
 
         System.out.println("Heroes y Villanos: El Videojuego.\n--------------------------------");
 
@@ -76,49 +80,49 @@ public class InterfazDeUsuario {
         _mostrarCompetidor(competidor, false);
     }
     public static void _mostrarCompetidor(Competidor competidor, boolean subliga) {
-        
         if (competidor.esLiga) {
             Liga liga = (Liga) competidor;
-            List<Competidor> competidores = liga.getCompetidores();
+            Map<String, Competidor> competidores = liga.getCompetidores();
             if (subliga)
                 System.out.print("\tSubliga: ");
             System.out.println(liga);
-            for (Competidor c : competidores) {
-                _mostrarCompetidor(c,true);
+            for (Competidor c : competidores.values()) {
+                _mostrarCompetidor(c, true);
             }
         } else {
             System.out.println(competidor);
         }
     }
-   
-    public static void mostrarPersonajes(Set<Competidor> competidores) {
+
+    public static void mostrarPersonajes(Map<String, Competidor> competidores) {
         System.out.println("Lista personajes:\n");
         System.out.println(
                 "\tHeroe/Villano Nombre Personaje       Nombre Real           Velocidad  Fuerza  Destreza  Resistencia");
-        for (Competidor competidor : competidores) {
+        for (Map.Entry<String, Competidor> competidorAux : competidores.entrySet()) {
+            Competidor competidor = competidorAux.getValue();
             if (!competidor.esLiga) {
                 System.out.println(competidor);
             }
         }
     }
-    public static void mostrarLigas(Set<Competidor> competidores) {
+    
+    public static void mostrarLigas(Map<String, Competidor> competidores) {
         System.out.println("\nLigas:");
-        for (Competidor competidor : competidores) {
+        for (Map.Entry<String, Competidor> competidorAux : competidores.entrySet()) {
+            Competidor competidor = competidorAux.getValue();
             if (competidor.esLiga) {
                 mostrarCompetidor(competidor);
             }
         }
     }
-   
+    
 
-    public static void guardarEnArchivo(Set<Competidor> competidores, boolean personaje) {
+    public static void guardarEnArchivo(Map<String, Competidor> competidores, boolean personaje) {
         String nombreArchivo = personaje ? "personajesOut.txt" : "ligasNuevas.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
-            for (Competidor competidor : competidores) {
-                if (personaje && !competidor.esLiga) {
-                    writer.write(competidor.toString());
-                    writer.newLine();
-                } else if (!personaje && competidor.esLiga) {
+            for (Map.Entry<String, Competidor> entry : competidores.entrySet()) {
+                Competidor competidor = entry.getValue();
+                if ((personaje && !competidor.esLiga) || (!personaje && competidor.esLiga)) {
                     writer.write(competidor.toString());
                     writer.newLine();
                 }
@@ -129,5 +133,4 @@ public class InterfazDeUsuario {
         }
     }
    
-
 }

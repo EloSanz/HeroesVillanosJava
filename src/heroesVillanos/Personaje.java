@@ -6,7 +6,6 @@ import Excepciones.CaracteristicaNegativaException;
 
 public abstract class Personaje extends Competidor {
     private String nombreReal;
-
     private int velocidad;
     private int fuerza;
     private int resistencia;

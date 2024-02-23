@@ -1,19 +1,16 @@
 package interfaz;
-
-
+import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-
 import Excepciones.CaracteristicaNegativaException;
 import archivos.Archivo;
 import heroesVillanos.*;
 
 public class AdministracionDePersonajes {
     
-    public static void administrador(Set<Competidor> competidores) {
+    public static void administrador( Map<String,Competidor>  competidores) {
         Scanner scanner = new Scanner(System.in);
         String mensaje = "1) Carga desde archivo.\n" +
-                "2) Creación de personaje.\n " +
+                "2) Creación de personaje.\n" +
                 "3) Listado de personajes.\n" +
                 "4) Guardar en archivo todos los personajes.\n" +
                 "5) Volver al menú principal.";
@@ -25,11 +22,7 @@ public class AdministracionDePersonajes {
     
             switch (opcion) {
                 case 1:
-                    System.out.println("Ingrese el nombre del archivo: ");
-                    String path = scanner.next();
-                    Archivo archivo = new Archivo(path);
-                    archivo.cargarPersonajes(competidores);
-                    System.out.println("Cargado: " + path);
+                    cargarDesdeArchivo(scanner, competidores);
                     break;
                 case 2:
                     crearPersonaje(scanner, competidores);
@@ -49,8 +42,17 @@ public class AdministracionDePersonajes {
     
         scanner.close();
     }
-    
-    public static void crearPersonaje(Scanner scanner, Set<Competidor> competidores) {
+    public static void cargarDesdeArchivo(Scanner scanner, Map<String, Competidor> competidores)
+    {
+        System.out.println("Ingrese el nombre del archivo: ");
+                    String path = scanner.next();
+                    Archivo archivo = new Archivo(path);
+                    if (archivo.cargarPersonajes(competidores))
+                        System.out.println("Cargado: " + path);
+                    else
+                        System.out.println("Error al cargar el archivo " + path);
+    }
+    public static void crearPersonaje(Scanner scanner, Map<String, Competidor> competidores) {
         int tipo;
         do {
             System.out.println("Creación de Personaje");
@@ -83,18 +85,19 @@ public class AdministracionDePersonajes {
     
         if (tipo == 1) {
             try {
-                competidores.add(new Heroe(nombreReal, nombrePersonaje, velocidad, fuerza, destreza, resistencia));
+                competidores.put(nombrePersonaje, new Heroe(nombreReal, nombrePersonaje, velocidad, fuerza, destreza, resistencia));
             } catch (CaracteristicaNegativaException e) {
                 System.out.println("Error al crear el héroe: " + e.getMessage());
             }
         } else if (tipo == 2) {
             try {
-                competidores.add(new Villano(nombreReal, nombrePersonaje, velocidad, fuerza, destreza, resistencia));
+                competidores.put(nombrePersonaje, new Villano(nombreReal, nombrePersonaje, velocidad, fuerza, destreza, resistencia));
             } catch (CaracteristicaNegativaException e) {
                 System.out.println("Error al crear el villano: " + e.getMessage());
             }
         }
     }
+    
     
     
 }

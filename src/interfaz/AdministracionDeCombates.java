@@ -8,7 +8,7 @@ public class AdministracionDeCombates {
         System.out.println("\nRealizacion de Combates.\n--------------------------------");
 
         String mensaje = "1) Combate entre personajes.\n" +
-                "2) Combate entre ligas.\n " +
+                "2) Combate entre ligas.\n" +
                 "3) Combate entre personaje y liga.\n";
 
         int opcion = InterfazDeUsuario.obtenerOpcion(mensaje, 1, 3, scanner);

@@ -28,25 +28,25 @@ public abstract class Competidor {
             switch (caracteristica) {
                 case VELOCIDAD:
                     if(this.getVelocidad() == competidor.getVelocidad()) {
-                        return venceA(competidor, Caracteristica.FUERZA, contador++);
+                        return venceA(competidor, Caracteristica.FUERZA, contador+1);
                     } else {
                         return this.getVelocidad() > competidor.getVelocidad();
                     }
                 case FUERZA:
                     if(this.getFuerza() == competidor.getFuerza()) {
-                        return venceA(competidor, Caracteristica.RESISTENCIA, contador++);
+                        return venceA(competidor, Caracteristica.RESISTENCIA, contador+1);
                     } else {
                         return this.getFuerza() > competidor.getFuerza();
                     }
                 case RESISTENCIA:
                     if(this.getResistencia() == competidor.getResistencia()) {
-                        return venceA(competidor, Caracteristica.DESTREZA, contador++);
+                        return venceA(competidor, Caracteristica.DESTREZA, contador+1);
                     } else {
                         return this.getResistencia() > competidor.getResistencia();
                     }
                 case DESTREZA:
                     if(this.getDestreza() == competidor.getDestreza()) {
-                        return venceA(competidor, Caracteristica.VELOCIDAD, contador++);
+                        return venceA(competidor, Caracteristica.VELOCIDAD, contador+1);
                     } else {
                         return this.getDestreza() > competidor.getDestreza();
                     }
@@ -60,7 +60,6 @@ public abstract class Competidor {
         int contador = 0;
         return venceA(competidor, caracteristica, contador);
     }
-
     public abstract boolean esHeroe();
 
     public abstract boolean esVillano();

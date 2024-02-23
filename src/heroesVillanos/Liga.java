@@ -120,4 +120,8 @@ public class Liga extends Competidor {
        this.competidores.remove(miembro.getNombre());
     }
 
+    public boolean esHomogenea() {
+        return this.esHomogenea;
+    }
+
 }

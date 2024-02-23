@@ -18,14 +18,17 @@ public class InterfazDeUsuario {
     public static void menu() {
         Map<String,Competidor> competidores = new HashMap<>();
 
-        Archivo archivo = new Archivo("personajes.in");
+        Archivo archivo = new Archivo("D:\\VisualStudio\\Java\\TP2\\HeroesVillanosJava\\personajes.in");
         archivo.cargarPersonajes(competidores);
-        archivo.cargarLigas("ligas.in", competidores);
+        archivo.cargarLigas("D:\\VisualStudio\\Java\\TP2\\HeroesVillanosJava\\ligas.in", competidores);
 
-        for (Competidor  competidor : competidores.values()) {
-            if(competidor.getNombre().equals("Los Veloces"))
+        for (Competidor competidor : competidores.values()) {
+            if(competidor.getNombre().equals("DC"))
             {
+                Liga liga = (Liga)competidor;
                 mostrarCompetidor(competidor);
+                System.out.println(competidor.getVelocidad());
+                System.out.println(liga.esHomogenea());
             }
         }
 

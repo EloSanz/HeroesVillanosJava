@@ -6,8 +6,7 @@ import archivos.Archivo;
 import heroesVillanos.*;
 
 public class AdministracionDePersonajes {
-    
-    public static void administrador( Map<String,Competidor>  competidores) {
+    public static void administrador(Map<String,Competidor>  competidores) {
         Scanner scanner = new Scanner(System.in);
         String mensaje = "1) Carga desde archivo.\n" +
                 "2) Creación de personaje.\n" +

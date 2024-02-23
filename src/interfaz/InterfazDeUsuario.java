@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import archivos.Archivo;
 //import archivos.Archivo;
 import heroesVillanos.Competidor;
 import heroesVillanos.Liga;
@@ -17,11 +18,19 @@ public class InterfazDeUsuario {
     public static void menu() {
         Map<String,Competidor> competidores = new HashMap<>();
 
-        //Archivo archivo = new Archivo("personajes.in");
-        //archivo.cargarPersonajes(competidores);
-        //archivo.cargarLigas("ligas.in", competidores);
+        Archivo archivo = new Archivo("personajes.in");
+        archivo.cargarPersonajes(competidores);
+        archivo.cargarLigas("ligas.in", competidores);
 
-        System.out.println("Heroes y Villanos: El Videojuego.\n--------------------------------");
+        for (Competidor  competidor : competidores.values()) {
+            if(competidor.getNombre().equals("Los Veloces"))
+            {
+                mostrarCompetidor(competidor);
+            }
+        }
+
+            /*
+             *  System.out.println("Heroes y Villanos: El Videojuego.\n--------------------------------");
 
 
         String mensaje = "1) Administracion de Personajes.\n" +
@@ -51,6 +60,9 @@ public class InterfazDeUsuario {
                 break;
         }
         sc.close();
+             */
+
+       
     }
 
     public static int obtenerOpcion(String mensaje, int min, int max, Scanner scanner) {

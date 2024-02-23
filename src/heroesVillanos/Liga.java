@@ -124,4 +124,8 @@ public class Liga extends Competidor {
         return this.esHomogenea;
     }
 
+    public void setEsHomogenea(boolean b) {
+        this.esHomogenea = b;
+    }
+
 }

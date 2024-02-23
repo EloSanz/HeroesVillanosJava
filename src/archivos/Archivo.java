@@ -79,8 +79,11 @@ public class Archivo {
                                 personajesCargados.add((Personaje) competidor);
                             }
                             if (competidor.getEsLiga()) {
-                                liga.agregarMiembro(competidor);
                                 Liga subliga = (Liga) competidor;
+                                if(!subliga.esHomogenea())
+                                    liga.setEsHomogenea(false);
+                                    
+                                liga.agregarMiembro(competidor);
                                 Map<String, Competidor> miembrosSubliga = subliga.getCompetidores();
                                 
                                 for (Competidor miembro : miembrosSubliga.values()) {

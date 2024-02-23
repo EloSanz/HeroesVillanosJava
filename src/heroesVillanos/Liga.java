@@ -9,7 +9,7 @@ public class Liga extends Competidor {
     private boolean esLigaDeHeroes = true;
     //
     public Liga(String nombre) {
-        esLiga = true;
+        this.esLiga = true;
         this.setNombre(nombre);
         this.competidores = new HashMap<>();//compoite implementado
     }
@@ -19,8 +19,6 @@ public class Liga extends Competidor {
 	{
 		return "Liga: " + this.nombre;
 	}
-
-
 
     public void agregarMiembro(Competidor miembroNuevo) {
         competidores.put(miembroNuevo.getNombre(), miembroNuevo); // Agregar el miembro al HashMap
@@ -104,7 +102,7 @@ public class Liga extends Competidor {
         return true;
     } else {
         for (Competidor competidor : competidores.values()) {
-            if (competidor.esLiga) {
+            if (competidor.getEsLiga()) {
                 Liga liga = (Liga) competidor;
                 if (liga.contieneA(other)) {
                     return true;

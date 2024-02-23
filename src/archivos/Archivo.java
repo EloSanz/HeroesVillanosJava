@@ -74,11 +74,11 @@ public class Archivo {
                     for (Competidor competidor : competidores.values()) {
                         if (miembroBuscado.equals(competidor.getNombre())) { 
                             // si es un personaje y aun no fue cargado en el ArrayList ->
-                            if (!competidor.esLiga && !personajesCargados.contains((Personaje) competidor)) {
+                            if (!competidor.getEsLiga() && !personajesCargados.contains((Personaje) competidor)) {
                                 liga.agregarMiembro(competidor);
                                 personajesCargados.add((Personaje) competidor);
                             }
-                            if (competidor.esLiga) {
+                            if (competidor.getEsLiga()) {
                                 liga.agregarMiembro(competidor);
                                 Liga subliga = (Liga) competidor;
                                 Map<String, Competidor> miembrosSubliga = subliga.getCompetidores();

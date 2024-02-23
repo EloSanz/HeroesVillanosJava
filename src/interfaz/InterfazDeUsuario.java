@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import archivos.Archivo;
+//import archivos.Archivo;
 import heroesVillanos.Competidor;
 import heroesVillanos.Liga;
 
@@ -17,9 +17,9 @@ public class InterfazDeUsuario {
     public static void menu() {
         Map<String,Competidor> competidores = new HashMap<>();
 
-        Archivo archivo = new Archivo("personajes.in");
-        archivo.cargarPersonajes(competidores);
-        archivo.cargarLigas("ligas.in", competidores);
+        //Archivo archivo = new Archivo("personajes.in");
+        //archivo.cargarPersonajes(competidores);
+        //archivo.cargarLigas("ligas.in", competidores);
 
         System.out.println("Heroes y Villanos: El Videojuego.\n--------------------------------");
 
@@ -80,7 +80,7 @@ public class InterfazDeUsuario {
         _mostrarCompetidor(competidor, false);
     }
     public static void _mostrarCompetidor(Competidor competidor, boolean subliga) {
-        if (competidor.esLiga) {
+        if (competidor.getEsLiga()) {
             Liga liga = (Liga) competidor;
             Map<String, Competidor> competidores = liga.getCompetidores();
             if (subliga)
@@ -100,7 +100,7 @@ public class InterfazDeUsuario {
                 "\tHeroe/Villano Nombre Personaje       Nombre Real           Velocidad  Fuerza  Destreza  Resistencia");
         for (Map.Entry<String, Competidor> competidorAux : competidores.entrySet()) {
             Competidor competidor = competidorAux.getValue();
-            if (!competidor.esLiga) {
+            if (!competidor.getEsLiga()) {
                 System.out.println(competidor);
             }
         }
@@ -110,7 +110,7 @@ public class InterfazDeUsuario {
         System.out.println("\nLigas:");
         for (Map.Entry<String, Competidor> competidorAux : competidores.entrySet()) {
             Competidor competidor = competidorAux.getValue();
-            if (competidor.esLiga) {
+            if (competidor.getEsLiga()) {
                 mostrarCompetidor(competidor);
             }
         }
@@ -122,7 +122,7 @@ public class InterfazDeUsuario {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (Map.Entry<String, Competidor> entry : competidores.entrySet()) {
                 Competidor competidor = entry.getValue();
-                if ((personaje && !competidor.esLiga) || (!personaje && competidor.esLiga)) {
+                if ((personaje && !competidor.getEsLiga()) || (!personaje && competidor.getEsLiga())) {
                     writer.write(competidor.toString());
                     writer.newLine();
                 }

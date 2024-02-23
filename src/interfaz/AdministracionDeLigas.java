@@ -79,7 +79,7 @@ public class AdministracionDeLigas {
             nombreBuscado = scanner.nextLine();
             Competidor competidor = competidores.get(nombreBuscado); // Obtener el competidor por su nombre
             if (competidor != null) {
-                if (competidor.esLiga) {
+                if (competidor.getEsLiga()) {
                     Liga subliga = (Liga) competidor;
                     if (liga.contieneA(subliga)) {
                         System.out.println("La subliga " + subliga.getNombre() + " ya está presente en la liga principal.");

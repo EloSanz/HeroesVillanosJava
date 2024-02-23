@@ -4,6 +4,7 @@ import Excepciones.CaracteristicaInexistenteException;
 
 public abstract class Competidor {
     protected String nombre;
+    protected boolean esLiga;
 
     @Override
     public abstract String toString();
@@ -16,9 +17,12 @@ public abstract class Competidor {
 
     public abstract double getDestreza();
 
-    public String getNombre()
-    {
-        return nombre;
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public boolean getEsLiga() {
+        return this.esLiga;
     }
 
     public boolean venceA(Competidor competidor, Caracteristica caracteristica, int contador) throws CaracteristicaInexistenteException {
@@ -63,8 +67,6 @@ public abstract class Competidor {
     public abstract boolean esHeroe();
 
     public abstract boolean esVillano();
-
-    public boolean esLiga;
 
     public abstract boolean contieneA(String string);
 

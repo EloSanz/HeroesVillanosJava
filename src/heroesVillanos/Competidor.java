@@ -9,13 +9,11 @@ public abstract class Competidor {
     @Override
     public abstract String toString();
 
-    public abstract double getVelocidad();
+    public abstract double getCaracteristica(Caracteristica caracteristica);
 
-    public abstract double getFuerza();
+    public abstract double calcularValorTotalCaracteristica(Caracteristica caracteristica);
 
-    public abstract double getResistencia();
-
-    public abstract double getDestreza();
+    public abstract int contarCompetidores();
 
     public String getNombre() {
         return this.nombre;
@@ -25,34 +23,35 @@ public abstract class Competidor {
         return this.esLiga;
     }
 
-    public boolean venceA(Competidor competidor, Caracteristica caracteristica, int contador) throws CaracteristicaInexistenteException {
-        if(contador > 3) {
+    public boolean venceA(Competidor competidor, Caracteristica caracteristica, int contador)
+            throws CaracteristicaInexistenteException {
+        if (contador > 3) {
             return false;
         } else {
             switch (caracteristica) {
                 case VELOCIDAD:
-                    if(this.getVelocidad() == competidor.getVelocidad()) {
-                        return venceA(competidor, Caracteristica.FUERZA, contador+1);
+                    if (this.getCaracteristica(Caracteristica.VELOCIDAD) == competidor.getCaracteristica(Caracteristica.VELOCIDAD)) {
+                        return venceA(competidor, Caracteristica.FUERZA, contador + 1);
                     } else {
-                        return this.getVelocidad() > competidor.getVelocidad();
+                        return this.getCaracteristica(Caracteristica.VELOCIDAD) > competidor.getCaracteristica(Caracteristica.VELOCIDAD);
                     }
                 case FUERZA:
-                    if(this.getFuerza() == competidor.getFuerza()) {
-                        return venceA(competidor, Caracteristica.RESISTENCIA, contador+1);
+                    if (this.getCaracteristica(Caracteristica.FUERZA) == competidor.getCaracteristica(Caracteristica.FUERZA)) {
+                        return venceA(competidor, Caracteristica.RESISTENCIA, contador + 1);
                     } else {
-                        return this.getFuerza() > competidor.getFuerza();
+                        return this.getCaracteristica(Caracteristica.FUERZA) > competidor.getCaracteristica(Caracteristica.FUERZA);
                     }
                 case RESISTENCIA:
-                    if(this.getResistencia() == competidor.getResistencia()) {
-                        return venceA(competidor, Caracteristica.DESTREZA, contador+1);
+                    if (this.getCaracteristica(Caracteristica.RESISTENCIA) == competidor.getCaracteristica(Caracteristica.RESISTENCIA)) {
+                        return venceA(competidor, Caracteristica.DESTREZA, contador + 1);
                     } else {
-                        return this.getResistencia() > competidor.getResistencia();
+                        return this.getCaracteristica(Caracteristica.RESISTENCIA) > competidor.getCaracteristica(Caracteristica.RESISTENCIA);
                     }
                 case DESTREZA:
-                    if(this.getDestreza() == competidor.getDestreza()) {
-                        return venceA(competidor, Caracteristica.VELOCIDAD, contador+1);
+                    if (this.getCaracteristica(Caracteristica.DESTREZA) == competidor.getCaracteristica(Caracteristica.DESTREZA)) {
+                        return venceA(competidor, Caracteristica.VELOCIDAD, contador + 1);
                     } else {
-                        return this.getDestreza() > competidor.getDestreza();
+                        return this.getCaracteristica(Caracteristica.DESTREZA) > competidor.getCaracteristica(Caracteristica.DESTREZA);
                     }
                 default:
                     throw new CaracteristicaInexistenteException("Característica inexistente: " + caracteristica);
@@ -64,11 +63,10 @@ public abstract class Competidor {
         int contador = 0;
         return venceA(competidor, caracteristica, contador);
     }
+
     public abstract boolean esHeroe();
 
     public abstract boolean esVillano();
 
     public abstract boolean contieneA(String string);
-
-
 }

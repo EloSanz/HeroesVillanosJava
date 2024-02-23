@@ -8,26 +8,25 @@ import java.util.Map;
 import java.util.Scanner;
 
 import archivos.Archivo;
+import heroesVillanos.Caracteristica;
 //import archivos.Archivo;
 import heroesVillanos.Competidor;
 import heroesVillanos.Liga;
 
 public class InterfazDeUsuario {
 
-
     public static void menu() {
-        Map<String,Competidor> competidores = new HashMap<>();
+        Map<String, Competidor> competidores = new HashMap<>();
 
-        Archivo archivo = new Archivo("personajes.in");
+        Archivo archivo = new Archivo("D:\\VisualStudio\\Java\\TP2\\HeroesVillanosJava\\personajes.in");
         archivo.cargarPersonajes(competidores);
-        archivo.cargarLigas("ligas.in", competidores);
+        archivo.cargarLigas("D:\\VisualStudio\\Java\\TP2\\HeroesVillanosJava\\ligas.in", competidores);
 
         for (Competidor competidor : competidores.values()) {
-            if(competidor.getNombre().equals("Los Veloces"))
-            {
-                Liga liga = (Liga)competidor;
+            if (competidor.getNombre().equals("Los Veloces")) {
+                Liga liga = (Liga) competidor;
                 mostrarCompetidor(competidor);
-                System.out.println(competidor.getVelocidad());
+                System.out.println(competidor.getCaracteristica(Caracteristica.VELOCIDAD));
                 System.out.println(liga.esHomogenea());
             }
         }
@@ -73,27 +72,26 @@ public class InterfazDeUsuario {
         int opcion = 0;
 
         System.out.println(mensaje);
-        
+
         do {
             System.out.print("Opcion: ");
-            if(scanner.hasNextInt()){
+            if (scanner.hasNextInt()) {
                 opcion = scanner.nextInt();
             } else {
                 System.out.println("Por favor, ingrese un número válido.");
                 scanner.next();
             }
-        } while(opcion > max || opcion < min);
+        } while (opcion > max || opcion < min);
 
-        //scanner.close();
+        // scanner.close();
 
         return opcion;
     }
 
-
-    public static void mostrarCompetidor(Competidor competidor)
-    {
+    public static void mostrarCompetidor(Competidor competidor) {
         _mostrarCompetidor(competidor, false);
     }
+
     public static void _mostrarCompetidor(Competidor competidor, boolean subliga) {
         if (competidor.getEsLiga()) {
             Liga liga = (Liga) competidor;
@@ -120,7 +118,7 @@ public class InterfazDeUsuario {
             }
         }
     }
-    
+
     public static void mostrarLigas(Map<String, Competidor> competidores) {
         System.out.println("\nLigas:");
         for (Map.Entry<String, Competidor> competidorAux : competidores.entrySet()) {
@@ -130,7 +128,6 @@ public class InterfazDeUsuario {
             }
         }
     }
-    
 
     public static void guardarEnArchivo(Map<String, Competidor> competidores, boolean personaje) {
         String nombreArchivo = personaje ? "personajesOut.txt" : "ligasNuevas.txt";
@@ -142,10 +139,11 @@ public class InterfazDeUsuario {
                     writer.newLine();
                 }
             }
-            System.out.println(personaje ? "Personajes guardados en el archivo 'personajesOut.txt'" : "Ligas guardadas en el archivo 'ligasNuevas.txt'");
+            System.out.println(personaje ? "Personajes guardados en el archivo 'personajesOut.txt'"
+                    : "Ligas guardadas en el archivo 'ligasNuevas.txt'");
         } catch (IOException e) {
             System.out.println("Error al guardar los datos en el archivo: " + e.getMessage());
         }
     }
-   
+
 }

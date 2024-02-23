@@ -7,18 +7,18 @@ public class Liga extends Competidor {
     private Map<String, Competidor> competidores; // tanto Personajes como Ligas
     private boolean esHomogenea = true;
     private boolean esLigaDeHeroes = true;
+
     //
     public Liga(String nombre) {
         this.esLiga = true;
         this.setNombre(nombre);
-        this.competidores = new HashMap<>();//compoite implementado
+        this.competidores = new HashMap<>();// compoite implementado
     }
 
     @Override
-	public String toString()
-	{
-		return "Liga: " + this.nombre;
-	}
+    public String toString() {
+        return "Liga: " + this.nombre;
+    }
 
     public void agregarMiembro(Competidor miembroNuevo) {
         competidores.put(miembroNuevo.getNombre(), miembroNuevo); // Agregar el miembro al HashMap
@@ -34,90 +34,75 @@ public class Liga extends Competidor {
             }
         }
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public double getVelocidad() {
-        double velocidades = 0;
-        for (Competidor competidor : competidores.values()) { // Iterar sobre los valores del HashMap
-            velocidades += competidor.getVelocidad();
-        }
-        if (this.esHomogenea) {
-            return (velocidades / competidores.size()) * 1.10; // bonus
-        }
-        return (velocidades / competidores.size());
+
+    @Override
+    public double getCaracteristica(Caracteristica caracteristica) {
+        // Este método sigue dividiendo el valor total por el número de competidores
+        // para obtener el promedio de la característica solicitada.
+        double total = calcularValorTotalCaracteristica(caracteristica);
+        int cantidad = contarCompetidores();
+        return cantidad > 0 ? total / cantidad : 0;
     }
-    
-    public double getFuerza() {
-        double fuerzas = 0;
-        for (Competidor competidor : competidores.values()) { // Iterar sobre los valores del HashMap
-            fuerzas += competidor.getFuerza();
+
+    @Override
+    public double calcularValorTotalCaracteristica(Caracteristica caracteristica) {
+        double suma = 0;
+        for (Competidor competidor : competidores.values()) {
+            suma += competidor.calcularValorTotalCaracteristica(caracteristica);
         }
-        if (this.esHomogenea) {
-            return (fuerzas / competidores.size()) * 1.10; // bonus
-        }
-        return (fuerzas / competidores.size());
+        return suma;
     }
-    
-    public double getResistencia() {
-        double resistencias = 0;
-        for (Competidor competidor : competidores.values()) { // Iterar sobre los valores del HashMap
-            resistencias += competidor.getResistencia();
+
+    @Override
+    public int contarCompetidores() {
+        int contador = 0;
+        for (Competidor competidor : competidores.values()) {
+            contador += competidor.contarCompetidores();
         }
-        if (this.esHomogenea) {
-            return (resistencias / competidores.size()) * 1.10; // bonus
-        }
-        return (resistencias / competidores.size());
+        return contador;
     }
-    
-    public double getDestreza() {
-        double destrezas = 0;
-        for (Competidor competidor : competidores.values()) { // Iterar sobre los valores del HashMap
-            destrezas += competidor.getDestreza();
-        }
-        if (this.esHomogenea) {
-            return (destrezas / competidores.size()) * 1.10; // bonus
-        }
-        return (destrezas / competidores.size());
-    }
-    
+
     @Override
     public boolean esHeroe() {
         return this.esLigaDeHeroes;
     }
-    
+
     @Override
     public boolean esVillano() {
-        return (!esLigaDeHeroes && esHomogenea); 
+        return (!esLigaDeHeroes && esHomogenea);
     }
-    
-    
+
     public boolean contieneA(String nombre) {
 
         return competidores.containsKey(nombre); // Utilizar containsKey para verificar si la clave existe en el HashMap
     }
 
     public boolean contieneA(Competidor other) {
-    if (competidores.containsKey(other.getNombre())) {
-        return true;
-    } else {
-        for (Competidor competidor : competidores.values()) {
-            if (competidor.getEsLiga()) {
-                Liga liga = (Liga) competidor;
-                if (liga.contieneA(other)) {
-                    return true;
+        if (competidores.containsKey(other.getNombre())) {
+            return true;
+        } else {
+            for (Competidor competidor : competidores.values()) {
+                if (competidor.getEsLiga()) {
+                    Liga liga = (Liga) competidor;
+                    if (liga.contieneA(other)) {
+                        return true;
+                    }
                 }
             }
         }
+        return false;
     }
-    return false;
-}
+
     public Map<String, Competidor> getCompetidores() {
-        return this.competidores; 
+        return this.competidores;
     }
 
     public void quitarMiembro(Competidor miembro) {
-       this.competidores.remove(miembro.getNombre());
+        this.competidores.remove(miembro.getNombre());
     }
 
     public boolean esHomogenea() {
@@ -127,5 +112,4 @@ public class Liga extends Competidor {
     public void setEsHomogenea(boolean b) {
         this.esHomogenea = b;
     }
-
 }

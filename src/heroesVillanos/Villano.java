@@ -5,16 +5,15 @@ import Excepciones.CaracteristicaNegativaException;
 public class Villano extends Personaje {
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return String.format("%-15s: \t%-20s %-20s  \t%.1f\t%.1f\t%.1f\t%.1f",
-            "Villano",
-			this.getNombre(),
-            this.getNombreReal(),
-            this.getVelocidad(),
-            this.getFuerza(),
-            this.getDestreza(),
-            this.getResistencia());
+				"Villano",
+				this.getNombre(),
+				this.getNombreReal(),
+				this.getCaracteristica(Caracteristica.VELOCIDAD),
+				this.getCaracteristica(Caracteristica.FUERZA),
+				this.getCaracteristica(Caracteristica.DESTREZA),
+				this.getCaracteristica(Caracteristica.RESISTENCIA));
 	}
 
 	public Villano(String nombreReal, String nombrePersonaje, int velocidad, int fuerza, int resistencia, int destreza)
@@ -30,8 +29,19 @@ public class Villano extends Personaje {
 	public boolean esVillano() {
 		return true;
 	}
+
 	@Override
 	public boolean contieneA(String string) {
 		return this.nombre.equals(string);
+	}
+
+	@Override
+	public double calcularValorTotalCaracteristica(Caracteristica caracteristica) {
+		return this.getCaracteristica(caracteristica);
+	}
+
+	@Override
+	public int contarCompetidores() {
+		return 1;
 	}
 }

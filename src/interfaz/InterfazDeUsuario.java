@@ -3,7 +3,6 @@ package interfaz;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -16,12 +15,16 @@ import heroesVillanos.Liga;
 public class InterfazDeUsuario {
 
     public static void menu() {
-        Map<String, Competidor> competidores = new HashMap<>();
 
+        CompetidoresSingleton competidoresSingleton = CompetidoresSingleton.getInstance();
+        Map<String, Competidor> competidores = competidoresSingleton.getCompetidores();
         Archivo archivo = new Archivo("personajes.in");
         archivo.cargarPersonajes(competidores);
+        //para tener todo en memoria.
+        /*
         archivo.cargarLigas("ligas.in", competidores);
-
+        System.out.println("Heroes y Villanos: El Videojuego.\n--------------------------------");
+      
         for (Competidor competidor : competidores.values()) {
             if (competidor.getNombre().equals("Los Veloces")) {
                 Liga liga = (Liga) competidor;
@@ -30,11 +33,10 @@ public class InterfazDeUsuario {
                 System.out.println(liga.esHomogenea());
             }
         }
-
-            /*
-             *  System.out.println("Heroes y Villanos: El Videojuego.\n--------------------------------");
-
-
+        */
+      
+       
+    
         String mensaje = "1) Administracion de Personajes.\n" +
                 "2) Administracion de Ligas.\n" +
                 "3) Realizacion de Combates.\n" +
@@ -51,7 +53,7 @@ public class InterfazDeUsuario {
                 AdministracionDeLigas.administrador(competidores);
                 break;
             case 3: 
-                AdministracionDeCombates.realizacionDeCombates();
+                AdministracionDeCombates.realizacionDeCombates(competidores);
                 break;
             case 4: 
                 Reportes.reportes();
@@ -62,7 +64,7 @@ public class InterfazDeUsuario {
                 break;
         }
         sc.close();
-             */
+            
 
        
     }
@@ -121,8 +123,7 @@ public class InterfazDeUsuario {
 
     public static void mostrarLigas(Map<String, Competidor> competidores) {
         System.out.println("\nLigas:");
-        for (Map.Entry<String, Competidor> competidorAux : competidores.entrySet()) {
-            Competidor competidor = competidorAux.getValue();
+        for (Competidor competidor : competidores.values()) {
             if (competidor.getEsLiga()) {
                 mostrarCompetidor(competidor);
             }

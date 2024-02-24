@@ -53,7 +53,7 @@ public class AdministracionDeLigas {
         scanner.close();
     }
 
-    public static void crearLiga(Scanner scanner, Map<String, Competidor> competidores) {
+    private static void crearLiga(Scanner scanner, Map<String, Competidor> competidores) {
         System.out.println("Creación de Liga");
         String nombreLiga;
         boolean nombreValido = true;

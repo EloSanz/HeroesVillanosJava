@@ -20,18 +20,25 @@ public class Reportes {
         System.out.println("\nReportes.\n--------------------------------");
         Scanner scanner = new Scanner(System.in);
         String mensaje = "1) Personajes o ligas que vencen a un personaje por característica.\n" +
-                "2) Listado ordenado de personajes por múltiples características";
+                "2) Listado ordenado de personajes por múltiples características\n" + 
+                "3) Volver al menu principal\n";
 
-        int opcion = InterfazDeUsuario.obtenerOpcion(mensaje, 1, 2, scanner);
-
-        switch (opcion) {
-            case 1:
-                reportePersonajesQueVencen(competidores);
+        int opcion;
+		do {
+			opcion = InterfazDeUsuario.obtenerOpcion(mensaje, 1, 4, scanner);
+			switch (opcion) {
+		    case 1:
+		        reportePersonajesQueVencen(competidores);
+		        break;
+		    case 2:
+		        reportePersonajesOrdenados(competidores);
+		        break;
+		    case 3:
+                System.out.println("Volviendo al menú principal...");
+                InterfazDeUsuario.menu();
                 break;
-            case 2:
-                reportePersonajesOrdenados(competidores);
-                break;
-        }
+			}			
+		}while (opcion != 3);     
     }
 
     private static void reportePersonajesQueVencen(Map<String, Competidor> competidores) {

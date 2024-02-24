@@ -20,9 +20,10 @@ public class InterfazDeUsuario {
         Map<String, Competidor> competidores = competidoresSingleton.getCompetidores();
         Archivo archivo = new Archivo("personajes.in");
         archivo.cargarPersonajes(competidores);
+        archivo.cargarLigas("ligas.in", competidores);
         //para tener todo en memoria.
         /*
-        archivo.cargarLigas("ligas.in", competidores);
+  
         System.out.println("Heroes y Villanos: El Videojuego.\n--------------------------------");
       
         for (Competidor competidor : competidores.values()) {

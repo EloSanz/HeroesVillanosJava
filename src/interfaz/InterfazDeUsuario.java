@@ -57,7 +57,7 @@ public class InterfazDeUsuario {
                 AdministracionDeCombates.realizacionDeCombates(competidores);
                 break;
             case 4: 
-                Reportes.reportes();
+                Reportes.reportes(competidores);
                 break;
             case 5: 
                 System.out.println("Gracias por jugar.");

@@ -1,15 +1,19 @@
 package interfaz;
 
+import heroesVillanos.Caracteristica;
+import heroesVillanos.Competidor;
+import heroesVillanos.CompetidorComparator;
+import heroesVillanos.Personaje;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import Excepciones.CaracteristicaInexistenteException;
-import heroesVillanos.Caracteristica;
-import heroesVillanos.Competidor;
 
 public class Reportes {
     public static void reportes(Map<String, Competidor> competidores) {
@@ -31,32 +35,33 @@ public class Reportes {
     }
 
     private static void reportePersonajesQueVencen(Map<String, Competidor> competidores) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Ingrese el nombre del personaje: ");
-            String nombrePersonaje = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese el nombre del personaje: ");
+        String nombrePersonaje = scanner.nextLine();
 
-            Competidor personaje = competidores.get(nombrePersonaje);
-            if (personaje != null) {
-                System.out.println("Personajes o ligas que vencen a " + nombrePersonaje + " por característica:");
+        Competidor personaje = competidores.get(nombrePersonaje);
+        if (personaje != null) {
+            System.out.println("Ingrese la característica para la cual desea encontrar los personajes que vencen a " + nombrePersonaje + ": ");
+            String nombreCaracteristica = scanner.nextLine();
+            try {
+                Caracteristica caracteristica = Caracteristica.valueOf(nombreCaracteristica.toUpperCase());
+                System.out.println("Personajes o ligas que vencen a " + nombrePersonaje + " en " + caracteristica + ": " + personaje.getCaracteristica(caracteristica));
 
+                Map<String, Competidor> mapaVencedores = new LinkedHashMap<>();
                 for (Map.Entry<String, Competidor> entry : competidores.entrySet()) {
                     Competidor competidor = entry.getValue();
-                    if (!competidor.getNombre().equals(nombrePersonaje)) {
-                        try {
-                            if (competidor.esGanador(personaje, Caracteristica.VELOCIDAD) ||
-                                    competidor.esGanador(personaje, Caracteristica.FUERZA) ||
-                                    competidor.esGanador(personaje, Caracteristica.RESISTENCIA) ||
-                                    competidor.esGanador(personaje, Caracteristica.DESTREZA)) {
-                                System.out.println("- " + competidor.getNombre());
-                            }
-                        } catch (CaracteristicaInexistenteException e) {
-                            System.out.println("Error: " + e.getMessage());
-                        }
+                    if (!competidor.getNombre().equals(nombrePersonaje) && competidor.esGanador(personaje, caracteristica)) {
+                        mapaVencedores.put(entry.getKey(), entry.getValue());
                     }
                 }
-            } else {
-                System.out.println("El personaje ingresado no existe.");
+                InterfazDeUsuario.mostrarPersonajes(mapaVencedores);
+            } catch (IllegalArgumentException e) {
+                System.out.println("La característica ingresada no es válida.");
+            } catch (CaracteristicaInexistenteException e) {
+                System.out.println("Error: " + e.getMessage());
             }
+        } else {
+            System.out.println("El personaje ingresado no existe.");
         }
     }
 
@@ -74,26 +79,19 @@ public class Reportes {
         }
 
         // Ordenar los personajes según las características seleccionadas
-        List<Competidor> listaOrdenada = new ArrayList<>(competidores.values());
-        Collections.sort(listaOrdenada, new Comparator<Competidor>() {
-            @Override
-            public int compare(Competidor c1, Competidor c2) {
-                for (Caracteristica caracteristica : caracteristicas) {
-                    double valorC1 = c1.getCaracteristica(caracteristica);
-                    double valorC2 = c2.getCaracteristica(caracteristica);
-                    if (valorC1 != valorC2) {
-                        return Double.compare(valorC1, valorC2);
-                    }
-                }
-                // Si los personajes tienen las mismas características, se ordenan por nombre
-                return c1.getNombre().compareTo(c2.getNombre());
-            }
-        });
+        Map<String, Competidor> mapaOrdenado = new LinkedHashMap<>();
+        List<Map.Entry<String, Competidor>> listaOrdenada = new ArrayList<>(competidores.entrySet());
+        CompetidorComparator comparator = new CompetidorComparator(caracteristicas);
+        Collections.sort(listaOrdenada, comparator);
 
-        // Imprimir la lista ordenada de personajes
-        System.out.println("Listado ordenado de personajes por múltiples características:");
-        for (Competidor personaje : listaOrdenada) {
-            System.out.println("- " + personaje.getNombre());
+        // Llenar el mapa ordenado con los elementos ordenados
+        for (Map.Entry<String, Competidor> entry : listaOrdenada) {
+            mapaOrdenado.put(entry.getKey(), entry.getValue());
         }
+
+        // Imprimir el mapa ordenado de personajes
+        System.out.println("Listado ordenado de personajes por múltiples características:");
+        InterfazDeUsuario.mostrarPersonajes(mapaOrdenado);
     }
+
 }

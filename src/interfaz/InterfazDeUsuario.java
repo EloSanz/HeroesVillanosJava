@@ -20,14 +20,11 @@ public class InterfazDeUsuario {
         Map<String, Competidor> competidores = competidoresSingleton.getCompetidores();
         Archivo archivo = new Archivo("D:\\VisualStudio\\Java\\TP2\\HeroesVillanosJava\\personajes.in");
         archivo.cargarPersonajes(competidores);
-        archivo.cargarLigas("D:\\VisualStudio\\Java\\TP2\\HeroesVillanosJava\\ligas.in", competidores);
+        archivo.cargarLigas("D:\\VisualStudio\\Java\\TP2\\HeroesVillanosJava\\ligasNuevas.in", competidores);
+        System.out.println("Heroes y Villanos: El Videojuego.\n--------------------------------");
+        
         // para tener todo en memoria.
         /*
-         * 
-         * System.out.
-         * println("Heroes y Villanos: El Videojuego.\n--------------------------------"
-         * );
-         * 
          * for (Competidor competidor : competidores.values()) {
          * if (competidor.getNombre().equals("Los Veloces")) {
          * Liga liga = (Liga) competidor;
@@ -39,10 +36,10 @@ public class InterfazDeUsuario {
          */
 
         String mensaje = "1) Administracion de Personajes.\n" +
-                "2) Administracion de Ligas.\n" +
-                "3) Realizacion de Combates.\n" +
-                "4) Reportes.\n" +
-                "5) Salir.";
+                        "2) Administracion de Ligas.\n" +
+                        "3) Realizacion de Combates.\n" +
+                        "4) Reportes.\n" +
+                        "5) Salir.";
         Scanner sc = new Scanner(System.in);
         int opcion = InterfazDeUsuario.obtenerOpcion(mensaje, 1, 5, sc);
 
@@ -95,9 +92,12 @@ public class InterfazDeUsuario {
         if (competidor.getEsLiga()) {
             Liga liga = (Liga) competidor;
             Map<String, Competidor> competidores = liga.getCompetidores();
+
             if (subliga)
                 System.out.print("\tSubliga: ");
+
             System.out.println(liga);
+
             for (Competidor c : competidores.values()) {
                 _mostrarCompetidor(c, true);
             }
@@ -109,7 +109,7 @@ public class InterfazDeUsuario {
     public static void mostrarPersonajes(Map<String, Competidor> competidores) {
         System.out.println("Lista personajes:\n");
         System.out.println(
-                "Heroe/Villano\t Nombre Personaje       Nombre Real           Velocidad  Fuerza  Destreza  Resistencia");
+                "Heroe/Villano\t\tNombre Personaje     Nombre Real                      Velocidad       Fuerza          Destreza        Resistencia");
         for (Map.Entry<String, Competidor> competidorAux : competidores.entrySet()) {
             Competidor competidor = competidorAux.getValue();
             if (!competidor.getEsLiga()) {

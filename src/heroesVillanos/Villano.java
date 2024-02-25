@@ -6,7 +6,7 @@ public class Villano extends Personaje {
 
 	@Override
 	public String toString() {
-		return String.format("%-15s: \t%-20s %-20s  \t%.1f\t%.1f\t%.1f\t%.1f",
+		return String.format("%-15s: \t%-20s %-20s  \t%11.1f\t%11.1f\t%11.1f\t%11.1f",
 				"Villano",
 				this.getNombre(),
 				this.getNombreReal(),

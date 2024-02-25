@@ -39,8 +39,7 @@ public class Reportes {
             if (personaje != null) {
                 System.out.println("Personajes o ligas que vencen a " + nombrePersonaje + " por característica:");
 
-                for (Map.Entry<String, Competidor> entry : competidores.entrySet()) {
-                    Competidor competidor = entry.getValue();
+                for (Competidor competidor : competidores.values()) {
                     if (!competidor.getNombre().equals(nombrePersonaje)) {
                         try {
                             if (competidor.esGanador(personaje, Caracteristica.VELOCIDAD) ||
@@ -95,5 +94,7 @@ public class Reportes {
         for (Competidor personaje : listaOrdenada) {
             System.out.println("- " + personaje.getNombre());
         }
+
+        scanner.close();
     }
 }

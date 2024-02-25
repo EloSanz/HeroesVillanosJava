@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import archivos.Archivo;
-import heroesVillanos.Caracteristica;
+//import heroesVillanos.Caracteristica;
 //import archivos.Archivo;
 import heroesVillanos.Competidor;
 import heroesVillanos.Liga;
@@ -18,60 +18,57 @@ public class InterfazDeUsuario {
 
         CompetidoresSingleton competidoresSingleton = CompetidoresSingleton.getInstance();
         Map<String, Competidor> competidores = competidoresSingleton.getCompetidores();
-        Archivo archivo = new Archivo("personajes.in");
+        Archivo archivo = new Archivo("D:\\VisualStudio\\Java\\TP2\\HeroesVillanosJava\\personajes.in");
         archivo.cargarPersonajes(competidores);
-        archivo.cargarLigas("ligas.in", competidores);
-        //para tener todo en memoria.
+        archivo.cargarLigas("D:\\VisualStudio\\Java\\TP2\\HeroesVillanosJava\\ligas.in", competidores);
+        // para tener todo en memoria.
         /*
-  
-        System.out.println("Heroes y Villanos: El Videojuego.\n--------------------------------");
-      
-        for (Competidor competidor : competidores.values()) {
-            if (competidor.getNombre().equals("Los Veloces")) {
-                Liga liga = (Liga) competidor;
-                mostrarCompetidor(competidor);
-                System.out.println(competidor.getCaracteristica(Caracteristica.VELOCIDAD));
-                System.out.println(liga.esHomogenea());
-            }
-        }
-        */
-      
-       
-    
+         * 
+         * System.out.
+         * println("Heroes y Villanos: El Videojuego.\n--------------------------------"
+         * );
+         * 
+         * for (Competidor competidor : competidores.values()) {
+         * if (competidor.getNombre().equals("Los Veloces")) {
+         * Liga liga = (Liga) competidor;
+         * mostrarCompetidor(competidor);
+         * System.out.println(competidor.getCaracteristica(Caracteristica.VELOCIDAD));
+         * System.out.println(liga.esHomogenea());
+         * }
+         * }
+         */
+
         String mensaje = "1) Administracion de Personajes.\n" +
                 "2) Administracion de Ligas.\n" +
                 "3) Realizacion de Combates.\n" +
                 "4) Reportes.\n" +
                 "5) Salir.";
         Scanner sc = new Scanner(System.in);
-        int opcion = InterfazDeUsuario.obtenerOpcion(mensaje, 1, 5, sc); 
+        int opcion = InterfazDeUsuario.obtenerOpcion(mensaje, 1, 5, sc);
 
         switch (opcion) {
-            case 1: 
+            case 1:
                 AdministracionDePersonajes.administrador(competidores);
                 break;
-            case 2: 
+            case 2:
                 AdministracionDeLigas.administrador(competidores);
                 break;
-            case 3: 
+            case 3:
                 AdministracionDeCombates.realizacionDeCombates(competidores);
                 break;
-            case 4: 
+            case 4:
                 Reportes.reportes(competidores);
                 break;
-            case 5: 
+            case 5:
                 System.out.println("Gracias por jugar.");
                 System.exit(0);
                 break;
         }
         sc.close();
-            
 
-       
     }
 
     public static int obtenerOpcion(String mensaje, int min, int max, Scanner scanner) {
-
         int opcion = 0;
 
         System.out.println(mensaje);

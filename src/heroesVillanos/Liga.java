@@ -12,7 +12,7 @@ public class Liga extends Competidor {
     public Liga(String nombre) {
         this.esLiga = true;
         this.setNombre(nombre);
-        this.competidores = new HashMap<>();// compoite implementado
+        this.competidores = new HashMap<>();// composite implementado
     }
 
     @Override

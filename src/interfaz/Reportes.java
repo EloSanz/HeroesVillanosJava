@@ -3,11 +3,11 @@ package interfaz;
 import heroesVillanos.Caracteristica;
 import heroesVillanos.Competidor;
 import heroesVillanos.CompetidorComparator;
-import heroesVillanos.Personaje;
+//import heroesVillanos.Personaje;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+//import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,12 +26,13 @@ public class Reportes {
         int opcion;
 		do {
 			opcion = InterfazDeUsuario.obtenerOpcion(mensaje, 1, 4, scanner);
+            scanner.nextLine(); // limpio el buffer
 			switch (opcion) {
 		    case 1:
-		        reportePersonajesQueVencen(competidores);
+		        reportePersonajesQueVencen(competidores, scanner);
 		        break;
 		    case 2:
-		        reportePersonajesOrdenados(competidores);
+		        reportePersonajesOrdenados(competidores, scanner);
 		        break;
 		    case 3:
                 System.out.println("Volviendo al menú principal...");
@@ -41,8 +42,7 @@ public class Reportes {
 		}while (opcion != 3);     
     }
 
-    private static void reportePersonajesQueVencen(Map<String, Competidor> competidores) {
-        Scanner scanner = new Scanner(System.in);
+    private static void reportePersonajesQueVencen(Map<String, Competidor> competidores, Scanner scanner) {
         System.out.println("Ingrese el nombre del personaje: ");
         String nombrePersonaje = scanner.nextLine();
 
@@ -56,7 +56,7 @@ public class Reportes {
 
                 Map<String, Competidor> mapaVencedores = new LinkedHashMap<>();
                 for (Competidor competidor : competidores.values()){
-                    if (!competidor.getNombre().equals(nombrePersonaje) && competidor.esGanador(personaje, caracteristica)) {
+                    if (competidor.esGanador(personaje, caracteristica, false) == 1) {
                         mapaVencedores.put(competidor.getNombre(), competidor);
                     }
                 }
@@ -71,13 +71,13 @@ public class Reportes {
         }
     }
 
-    private static void reportePersonajesOrdenados(Map<String, Competidor> competidores) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el número de características por las que desea ordenar: ");
-        int numCaracteristicas = scanner.nextInt();
+    private static void reportePersonajesOrdenados(Map<String, Competidor> competidores, Scanner scanner) {
+        String mensaje = "Ingrese el número de características por las que desea ordenar: ";
+        int numCaracteristicas = InterfazDeUsuario.obtenerOpcion(mensaje, 1, 4, scanner);
         scanner.nextLine(); // Consumir el salto de línea
 
         Caracteristica[] caracteristicas = new Caracteristica[numCaracteristicas];
+        System.out.println("Caracteristicas por las cuales ordenar: \nVELOCIDAD\nFUERZA\nDESTREZA\nRESISTENCIA");
         for (int i = 0; i < numCaracteristicas; i++) {
             System.out.println("Ingrese la característica #" + (i + 1) + ": ");
             String nombreCaracteristica = scanner.nextLine();

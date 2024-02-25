@@ -59,22 +59,22 @@ public class AdministracionDeCombates {
         try {
             switch (op) {
                 case 1:
-                    if(personaje1.esGanador(personaje2, Caracteristica.VELOCIDAD) == false) {
+                    if(personaje1.esGanador(personaje2, Caracteristica.VELOCIDAD, true) == 0) {
                         System.out.println("Los competidores EMPATAN TOTALMENTE.");
                     }
                     break;
                 case 2:
-                    if(personaje1.esGanador(personaje2, Caracteristica.VELOCIDAD) == false) {
+                    if(personaje1.esGanador(personaje2, Caracteristica.FUERZA, true) == 0) {
                         System.out.println("Los competidores EMPATAN TOTALMENTE.");
                     }
                     break;
                 case 3:
-                    if(personaje1.esGanador(personaje2, Caracteristica.VELOCIDAD) == false) {
+                    if(personaje1.esGanador(personaje2, Caracteristica.DESTREZA, true) == 0) {
                         System.out.println("Los competidores EMPATAN TOTALMENTE.");
                     }
                     break;
                 case 4:
-                    if(personaje1.esGanador(personaje2, Caracteristica.VELOCIDAD) == false) {
+                    if(personaje1.esGanador(personaje2, Caracteristica.RESISTENCIA, true) == 0) {
                         System.out.println("Los competidores EMPATAN TOTALMENTE.");
                     }   
                     break;
@@ -133,7 +133,7 @@ public class AdministracionDeCombates {
                 case 4:
                     System.out.println(
                             "Resultado: Personaje: " + liga1.getNombre() + " vence a " + personaje1.getNombre() +
-                                    " = " + liga1.esGanador(personaje1, Caracteristica.values()[op - 1]));
+                                    " = " + liga1.esGanador(personaje1, Caracteristica.values()[op - 1], true));
                     break;
             }
         } catch (CaracteristicaInexistenteException e) {
@@ -184,7 +184,7 @@ public class AdministracionDeCombates {
                 case 3:
                 case 4:
                     System.out.println("Resultado: Liga: " + liga1.getNombre() + " vence a " + liga2.getNombre() +
-                            " = " + liga1.esGanador(liga2, Caracteristica.values()[op - 1]));
+                            " = " + liga1.esGanador(liga2, Caracteristica.values()[op - 1], true));
                     break;
             }
         } catch (CaracteristicaInexistenteException e) {

@@ -83,13 +83,12 @@ public class InterfazDeUsuario {
             }
         } while (opcion > max || opcion < min);
 
-        // scanner.close();
-
         return opcion;
     }
 
     public static void mostrarCompetidor(Competidor competidor) {
         _mostrarCompetidor(competidor, false);
+        System.out.println("");
     }
 
     public static void _mostrarCompetidor(Competidor competidor, boolean subliga) {
@@ -110,13 +109,14 @@ public class InterfazDeUsuario {
     public static void mostrarPersonajes(Map<String, Competidor> competidores) {
         System.out.println("Lista personajes:\n");
         System.out.println(
-                "\tHeroe/Villano Nombre Personaje       Nombre Real           Velocidad  Fuerza  Destreza  Resistencia");
+                "Heroe/Villano\t Nombre Personaje       Nombre Real           Velocidad  Fuerza  Destreza  Resistencia");
         for (Map.Entry<String, Competidor> competidorAux : competidores.entrySet()) {
             Competidor competidor = competidorAux.getValue();
             if (!competidor.getEsLiga()) {
                 System.out.println(competidor);
             }
         }
+        System.out.println("");
     }
 
     public static void mostrarLigas(Map<String, Competidor> competidores) {

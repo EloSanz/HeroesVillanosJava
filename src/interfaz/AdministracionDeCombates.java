@@ -43,8 +43,7 @@ public class AdministracionDeCombates {
         do {
             personaje2 = getPersonaje(scanner, competidores, 2);
             if (personaje1 == personaje2) {
-                System.out
-                        .println("No se puede combatir contra si mismo. Ingrese otro personaje...\nPulse para avanzar");
+                System.out.println("No se puede combatir contra si mismo. Ingrese otro personaje...\nPulse para avanzar");
 
             }
         } while (personaje1 == personaje2);
@@ -80,7 +79,6 @@ public class AdministracionDeCombates {
                     }   
                     break;
             }
-
         } catch (CaracteristicaInexistenteException e) {
             System.out.println(e.getMessage());
         }

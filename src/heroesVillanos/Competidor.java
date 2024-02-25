@@ -26,7 +26,7 @@ public abstract class Competidor {
     public int venceA(Competidor competidor, Caracteristica caracteristica, int contador)
             throws CaracteristicaInexistenteException {
         if (contador > 3) {
-            return false;
+            return 0;
         } else {
             switch (caracteristica) {
                 case VELOCIDAD:
